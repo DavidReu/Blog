@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 //use PDO;
 
-class MyPDO
+class PdoController
 {
     private $dbName;
     private $server;

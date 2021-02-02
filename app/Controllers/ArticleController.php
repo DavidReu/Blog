@@ -10,9 +10,7 @@ $_SESSION['uri'] = $_SERVER['REQUEST_URI']; */
 
 namespace App\Controllers;
 
-require 'PdoController.php';
-
-use App\Controllers\MyPDO;
+//use App\Controllers\PdoController;
 use App\Models\ArticleModel;
 
 class ArticleController
@@ -31,7 +29,7 @@ class ArticleController
          * Tout ce qui se trouve après ob_start sera enregistrer dans la variable $content grâce à ob_get_clean 
          * et la variable $content est utilisé dans le template
          */
-
+        var_dump($_GET['article']);
         if (isset($_GET['article']) && $_GET['article'] != 'new') {
             $_SESSION['id'] = $_GET['article']; ?>
             <div class="container-fluid my-4">
@@ -112,8 +110,8 @@ class ArticleController
 
     public function home()
     {
-        var_dump(new MyPDO());
-        $myPDO = new MyPDO();
+        var_dump(new PdoController());
+        $myPDO = new PdoController();
         $pdo = $myPDO->getPDO();
         $articleModel = new ArticleModel($pdo);
         $articles = $articleModel->getAllArticle();
@@ -123,7 +121,7 @@ class ArticleController
 
     public function showarticle($id)
     {
-        $myPDO = new MyPDO();
+        $myPDO = new PdoController();
         $pdo = $myPDO->getPDO();
         $articleModel = new ArticleModel($pdo);
         $article = $articleModel->getArticleById($id);
@@ -133,7 +131,7 @@ class ArticleController
 
     public function createForm()
     {
-        $myPDO = new MyPDO();
+        $myPDO = new PdoController();
         $pdo = $myPDO->getPDO();
         $articleModel = new ArticleModel($pdo);
         if (isset($_POST['poster'])) {

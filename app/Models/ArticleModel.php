@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Controllers\MyPDO;
 
 class ArticleModel
 {
