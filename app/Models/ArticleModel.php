@@ -11,32 +11,10 @@ class ArticleModel
     {
         $this->pdo = $pdo;
     }
-    /*
-    public function afficherTitre()
-    {
-        echo $this->titre;
-    }
 
-    public function afficherContenu()
-    {
-        echo $this->contenu;
-    }
-
-    public function afficherImg()
-    {
-        echo $this->img;
-    }
-
-    public function afficherId()
-    {
-        echo $this->id;
-    } */
 
     public function create($titre, $contenu, $img)
     {
-        /* $this->titre = $titre;
-        $this->contenu = $contenu;
-        $this->img = $img; */
 
         try {
             $requete = $this->pdo->prepare('INSERT INTO `blogs`(`titre`, `contenu`, `user_id`, `img_url`) VALUES (:titre, :contenu, :userId, :img)');
@@ -57,7 +35,6 @@ class ArticleModel
 
         $req_del = "DELETE FROM blogs WHERE id=$id";
         $this->pdo->exec($req_del);
-        echo "L'article numéro " . $id . " a été supprimé";
     }
 
     public function update($id, $titre, $contenu, $img)

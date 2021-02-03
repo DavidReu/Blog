@@ -17,18 +17,24 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link" aria-current="page" href="/stage/blog/index.php">Accueil</a>
-                        <a class="nav-link" href="/stage/blog/index.php?article=new">Articles</a>
+                        <?php if ($_SESSION['admin'] == true) : ?>
+                            <a class="nav-link" href="/stage/blog/index.php?article=new">Créer un Article</a>
+                        <?php endif ?>
                         <a class="nav-link" href="user.php">Ma Page</a>
                     </div>
                 </div>
-                <form action="Controllers/connexion.php" method="POST" class="d-flex flex-column">
-                    <input type="text" name="email" placeholder="Email">
-                    <input type="password" name="mdp" placeholder="Mot de passe">
-                    <button class="btn btn-info" type="submit" name="connexion">Connexion</button>
+                <form action="/stage/blog/app/Controllers/connexion.php" method="POST" class="d-flex flex-column">
+                    <?php if ($_SESSION['admin'] != true) : ?>
+                        <input type="text" name="email" placeholder="Email">
+                        <input type="password" name="mdp" placeholder="Mot de passe">
+                        <button class="btn btn-info" type="submit" name="connexion">Connexion</button>
+                    <?php else : ?>
+                        <button class="btn btn-info" type="submit" name="deconnexion">Déconnexion</button>
+                    <?php endif ?>
                 </form>
             </div>
         </nav>
-        <div>
+        <div class="mt-5">
             <h1 class="text-center">
                 <?php $heure = date("H");
                 if ($heure < 18) {
@@ -44,6 +50,7 @@
     <?php
     echo $content;
     ?>
+
 
 </body>
 

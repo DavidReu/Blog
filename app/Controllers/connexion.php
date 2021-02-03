@@ -1,24 +1,18 @@
 <?php
-$mail = "user@mail.com";
-$mdp = "test";
+session_start();
+$mail = "admin@mail.com";
+$mdp = "admin";
 if ($_POST["email"] == $mail && $_POST["mdp"] == $mdp) {
-    header("Location:../Views/articleView.php");
-} else { ?>
-    <div class="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Erreur de saisie</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php
+    //var_dump($_SESSION['admin']);
+    $_SESSION['admin'] = true;
+    var_dump($_SESSION['admin']);
+} else {
+    echo "Connexion échouée";
 }
-?>
+
+if (isset($_POST['deconnexion'])) {
+    $_SESSION['admin'] = false;
+}
+header('Location:/stage/blog/index.php');
+
+exit();
