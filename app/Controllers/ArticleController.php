@@ -8,7 +8,6 @@ use App\Models\ArticleModel;
 class ArticleController
 {
 
-    //private $mamp = '/Applications/MAMP/htdocs/';
     public function render($path, $tab = [])
     {
         // Récupère les données et les extrait sous forme de variables
@@ -35,7 +34,6 @@ class ArticleController
         $articleModel = new ArticleModel($pdo);
         $articles = $articleModel->getAllArticle();
         $this->render(ROOT . 'Views/article/index.php', ['articles' => $articles]);
-        //require('/Applications/MAMP/htdocs/stage/blog/Views/indexContent.php');
     }
 
     public function showarticle($id)
@@ -45,7 +43,6 @@ class ArticleController
         $articleModel = new ArticleModel($pdo);
         $article = $articleModel->getArticleById($id);
         $this->render(ROOT . 'Views/article/single.php', ['article' => $article]);
-        //require('/Applications/MAMP/htdocs/stage/blog/Views/indexContent.php');
     }
 
     public function createForm()

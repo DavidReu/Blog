@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-//use PDO;
-
 class PdoModel
 {
     private $dbName;
@@ -30,9 +28,7 @@ class PdoModel
 
     public function getPDO()
     {
-        //return [$this->getDbName(), $this->getUser(), $this->getPass()];
         try {
-            //throw new Error("une erreur est survenue");
             $pdo = new \PDO('mysql:host=' . $this->server . ';dbname=' . $this->dbName . ';charset=utf8', $this->user, $this->pass);
             //$pdo = new \PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', 'root');
             $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -42,4 +38,3 @@ class PdoModel
         }
     }
 }
-   //return parent::__construct("mysql:host=" . $serverName . ";dbname=" . $dbName, $userName, $password);
