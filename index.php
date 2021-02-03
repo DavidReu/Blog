@@ -14,6 +14,15 @@ use App\Controllers\UserController;
 $articleController = new ArticleController();
 $user = new UserController();
 
+
+if (isset($_POST['connexion'])) {
+    $mail = $_POST['email'];
+    $mdp = $_POST['mdp'];
+    $user->login($mail, $mdp);
+}
+if (isset($_POST['deconnexion'])) {
+    $user->logout();
+}
 if (isset($_GET['article']) && $_GET['article'] != 'new') {
     $id = $_GET['article'];
     $articleController->showArticle($id);
@@ -31,9 +40,4 @@ if (isset($_GET['update'])) {
 if (isset($_POST['delete'])) {
     $id = $_POST['id'];
     $articleController->delete($id);
-}
-if (isset($_POST['connexion'])) {
-    $mail = $_POST['email'];
-    $mdp = $_POST['mdp'];
-    $user->adminLog($mail, $mdp);
 }

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-//use App\Controllers\PdoController;
+use App\Models\PdoModel;
 use App\Models\ArticleModel;
 
 class ArticleController
@@ -30,7 +30,7 @@ class ArticleController
 
     public function home()
     {
-        $myPDO = new PdoController();
+        $myPDO = new PdoModel();
         $pdo = $myPDO->getPDO();
         $articleModel = new ArticleModel($pdo);
         $articles = $articleModel->getAllArticle();
@@ -40,7 +40,7 @@ class ArticleController
 
     public function showarticle($id)
     {
-        $myPDO = new PdoController();
+        $myPDO = new PdoModel();
         $pdo = $myPDO->getPDO();
         $articleModel = new ArticleModel($pdo);
         $article = $articleModel->getArticleById($id);
@@ -50,7 +50,7 @@ class ArticleController
 
     public function createForm()
     {
-        $myPDO = new PdoController();
+        $myPDO = new PdoModel();
         $pdo = $myPDO->getPDO();
         $articleModel = new ArticleModel($pdo);
         if (isset($_POST['poster'])) {
@@ -67,7 +67,7 @@ class ArticleController
 
     public function formUpdate($id)
     {
-        $myPDO = new PdoController();
+        $myPDO = new PdoModel();
         $pdo = $myPDO->getPDO();
         $articleModel = new ArticleModel($pdo);
         $article = $articleModel->getArticleById($id);
@@ -82,7 +82,7 @@ class ArticleController
 
     public function delete($id)
     {
-        $myPDO = new PdoController();
+        $myPDO = new PdoModel();
         $pdo = $myPDO->getPDO();
         $articleModel = new ArticleModel($pdo);
         $articleModel->delete($id);

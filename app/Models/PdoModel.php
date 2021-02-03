@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Models;
 
 //use PDO;
 
-class PdoController
+class PdoModel
 {
     private $dbName;
     private $server;

@@ -23,7 +23,7 @@
                         <a class="nav-link" href="user.php">Ma Page</a>
                     </div>
                 </div>
-                <form action="/stage/blog/app/Controllers/connexion.php" method="POST" class="d-flex flex-column">
+                <form action="" method="POST" class="d-flex flex-column">
                     <?php if ($_SESSION['admin'] != true) : ?>
                         <input type="text" name="email" placeholder="Email">
                         <input type="password" name="mdp" placeholder="Mot de passe">
