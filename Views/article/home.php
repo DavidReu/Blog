@@ -1,5 +1,9 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
+$session = new Session();
+
 foreach ($articles as $key => $valeur) {
 ?>
     <div class="border my-4">
@@ -16,11 +20,11 @@ foreach ($articles as $key => $valeur) {
                 ?>
             </p>
             <div>
-                <?php if ($_SESSION['admin'] == false) : ?>
-                    <a class="btn btn-info" href="./index.php?article=<?php echo $valeur["id"] ?>">Lire l'article</a>
+                <?php if ($session->get('admin') == false) : ?>
+                    <a class="btn btn-info" href="./index.php/article?id=<?php echo $valeur["id"] ?>">Lire l'article</a>
                 <?php else : ?>
-                    <a class="btn btn-info" href="./index.php?update=<?php echo $valeur["id"] ?>">Modifier l'article</a>
-                    <form action="" method="POST">
+                    <a class="btn btn-info" href="./index.php/article/update?id=<?php echo $valeur["id"] ?>">Modifier l'article</a>
+                    <form action="/stage/blog/index.php/delete" method="POST">
                         <input type="hidden" name="id" value="<?php echo $valeur["id"] ?> ">
                         <input type="submit" value="Supprimer" name="delete" class="btn btn-info my-2">
                     </form>

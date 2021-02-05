@@ -2,22 +2,32 @@
 
 namespace App\Controllers;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
+
 class UserController
 {
-
-    public function login()
+    public function login(Request $request)
     {
-        $mail = "admin@mail.com";
-        $mdp = "admin";
-        if ($_POST["email"] == $mail && $_POST["mdp"] == $mdp) {
-            $_SESSION['admin'] = true;
+
+        $mail = $request->request->get('email');
+        $mdp = $request->request->get('mdp');
+        if ($mail == "admin@mail.com" && $mdp == "admin") {
+            $session = new Session();
+            $session->set('admin', 'true');
+            // set flash messages
+            $session->getFlashBag()->add('notice', 'Vous êtes connecté');
+            //return $_SESSION['admin'];
+            (new RedirectResponse("/stage/blog/index.php"))->send();
         }
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        if (isset($_POST['deconnexion'])) {
-            $_SESSION['admin'] = false;
-        }
+        $session = new Session();
+        $session->get('admin', 'false');
+        $session->clear();
+        (new RedirectResponse("/stage/blog/index.php"))->send();
     }
 }
