@@ -10,7 +10,7 @@ require_once('vendor/autoload.php');
 //---------- Use ----------
 use App\Controllers\ArticleController;
 use App\Controllers\UserController;
-use Symfony\Component\HttpFoundation\File\File;
+//use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 //--------------------------
@@ -20,9 +20,7 @@ $uri = $request->getPathInfo();
 
 //---------- SESSION ----------
 $session = new Session();
-//$session->start();
 $session->get('admin', false);
-// retrieve messages
 if ($session->get('admin') == true) {
     foreach ($session->getFlashBag()->get('notice', []) as $message) {
         echo '<div id="successMessage" class="alert alert-success text-center">' . $message . '</div>';

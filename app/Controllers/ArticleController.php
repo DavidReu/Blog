@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\VarDumper\VarDumper;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 
@@ -37,7 +36,7 @@ class ArticleController
          */
 
 
-        $content = new Response();
+        $content = new Response(ob_get_clean());
         //$content = ob_get_clean();
         include(ROOT . 'Views/template.php');
         return $content;
@@ -70,36 +69,38 @@ class ArticleController
         $articleModel = new ArticleModel($pdo);
         $uri = $request->getPathInfo();
         var_dump($uri);
+        $poster = $request->get('poster');
 
-        $titre = $request->request->get('titre');
-        $contenu = $request->request->get('contenu');
-        $img = $request->files->get('img');
-        //$upload = new UploadedFile($img);
-        var_dump($img);
-        //dd($titre, $contenu, $img);
-        $articleModel->create($titre, $contenu, '/stage/blog/upload/' . $img);
+        if (isset($poster)) {
+            $titre = $request->request->get('titre');
+            $contenu = $request->request->get('contenu');
+            $img = $_FILES['img']['name'];
 
-        if (isset($img)) {
             $dossier = ROOT . 'upload/';
-            $fichier = $img->originalName;
-            move_uploaded_file($_FILES["img"]["tmp_name"], $dossier . $fichier);
+            var_dump($dossier);
+            move_uploaded_file($_FILES["img"]["tmp_name"], $dossier . $img);
+            $fichier = '/stage/blog/upload/' . $img;
+            $articleModel->create($titre, $contenu, $fichier);
         }
-        $this->render(ROOT . 'Views/article/formcreate.php', ['article' => '']);
+        $this->render('formcreate', ['article' => '']);
     }
 
-    public function formUpdate($id)
+    public function formUpdate(Request $request)
     {
         $myPDO = new PdoModel();
         $pdo = $myPDO->getPDO();
         $articleModel = new ArticleModel($pdo);
+        $id = $request->get('id');
         $article = $articleModel->getArticleById($id);
+        $modifier = $request->get('modifier');
 
-        if (isset($_POST['modifier'])) {
-            $id = $_GET['id'];
-            $articleModel->update($id, $_POST['titre'], $_POST['contenu'], '/stage/blog/upload/' . $_FILES['img']['name']);
+        if (isset($modifier)) {
+            $titre = $request->request->get('titre');
+            $contenu = $request->request->get('contenu');
+            $articleModel->update($id, $titre, $contenu, '/stage/blog/upload/' . $_FILES['img']['name']);
             $article = $articleModel->getArticleById($id);
         }
-        $this->render(ROOT . 'Views/article/formUpdate.php', ['article' => $article]);
+        $this->render('formUpdate', ['article' => $article]);
     }
 
     public function delete(Request $request)

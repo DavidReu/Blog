@@ -33,13 +33,13 @@ class ArticleModel
     public function delete($id)
     {
 
-        $req_del = "DELETE FROM blogs WHERE id=$id";
+        $req_del = "DELETE FROM articles WHERE id=$id";
         $this->pdo->exec($req_del);
     }
 
     public function update($id, $titre, $contenu, $img)
     {
-        $req_up = $this->pdo->prepare("UPDATE `blogs` SET`titre`= :titre,`contenu`= :contenu,`img_url`= :img WHERE id=$id");
+        $req_up = $this->pdo->prepare("UPDATE `articles` SET`titre`= :titre,`contenu`= :contenu,`img_url`= :img WHERE id=$id");
         $req_up->execute(array(
             'titre' => $titre,
             'contenu' => $contenu,
@@ -49,14 +49,14 @@ class ArticleModel
 
     public function getArticleById($id)
     {
-        $query = $this->pdo->query("SELECT * FROM blogs WHERE id=$id");
+        $query = $this->pdo->query("SELECT * FROM articles WHERE id=$id");
         $article = $query->fetch(\PDO::FETCH_OBJ);
         return $article;
     }
 
     public function getAllArticle()
     {
-        $query = $this->pdo->query("SELECT * FROM blogs");
+        $query = $this->pdo->query("SELECT * FROM articles");
         $articles = $query->fetchAll(\PDO::FETCH_ASSOC);
         return $articles;
     }

@@ -29,15 +29,21 @@ $session = new Session();
                         <a class="nav-link" href="user.php">Ma Page</a>
                     </div>
                 </div>
-                <form action="./index.php/login" method="POST" class="d-flex flex-column">
-                    <?php if ($session->get('admin') != true) : ?>
-                        <input type="text" name="email" placeholder="Email">
-                        <input type="password" name="mdp" placeholder="Mot de passe">
-                        <button class="btn btn-info" type="submit" name="connexion">Connexion</button>
-                    <?php else : ?>
-                        <a href="/stage/blog/index.php/deconnexion" class="btn btn-info" type="submit" name="deconnexion">Déconnexion</a>
-                    <?php endif ?>
-                </form>
+                <div class="container w-50">
+                    <div class="d-flex justify-content-around align-items-center">
+                        <a href="/stage/blog/index.php/inscription" class="btn btn-large btn-info h-25">S'inscrire</a>
+                        <form action="./index.php/login" method="POST" class="d-flex flex-column">
+                            <?php if ($session->get('admin') != true) : ?>
+                                <input type="text" name="email" placeholder="Email">
+                                <input type="password" name="mdp" placeholder="Mot de passe">
+                                <button class="btn btn-info" type="submit" name="connexion">Connexion</button>
+                            <?php else : ?>
+                                <a href="/stage/blog/index.php/deconnexion" class="btn btn-info" type="submit" name="deconnexion">Déconnexion</a>
+                            <?php endif ?>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </nav>
         <div class="mt-5">
