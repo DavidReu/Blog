@@ -21,10 +21,10 @@ foreach ($articles as $key => $valeur) {
             </p>
             <div>
                 <?php if ($session->get('admin') == false) : ?>
-                    <a class="btn btn-info" href="./index.php/article?id=<?php echo $valeur["id"] ?>">Lire l'article</a>
+                    <a class="btn btn-info" href="article?id=<?php echo $valeur["id"] ?>">Lire l'article</a>
                 <?php else : ?>
-                    <a class="btn btn-info" href="./index.php/article/update?id=<?php echo $valeur["id"] ?>">Modifier l'article</a>
-                    <form action="/stage/blog/index.php/delete" method="POST">
+                    <a class="btn btn-info" href="article/update?id=<?php echo $valeur["id"] ?>">Modifier l'article</a>
+                    <form action="delete" method="POST">
                         <input type="hidden" name="id" value="<?php echo $valeur["id"] ?> ">
                         <input type="submit" value="Supprimer" name="delete" class="btn btn-info my-2">
                     </form>

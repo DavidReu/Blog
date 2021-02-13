@@ -9,7 +9,7 @@ class PdoModel
     private $user;
     private $pass;
 
-    public function __construct($dbName = 'blog', $serverName = 'localhost', $userName = 'root', $password = 'root')
+    public function __construct($dbName = 'db', $serverName = 'db', $userName = 'db', $password = 'db')
     {
         $this->dbName = $dbName;
         $this->server = $serverName;
@@ -30,7 +30,6 @@ class PdoModel
     {
         try {
             $pdo = new \PDO('mysql:host=' . $this->server . ';dbname=' . $this->dbName . ';charset=utf8', $this->user, $this->pass);
-            //$pdo = new \PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', 'root');
             $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             return $pdo;
         } catch (\Exception $e) {

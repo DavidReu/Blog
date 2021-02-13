@@ -22,25 +22,17 @@ $session = new Session();
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link" aria-current="page" href="/stage/blog/index.php">Accueil</a>
-                        <?php if ($session->get('admin') == true) : ?>
-                            <a class="nav-link" href="/stage/blog/index.php/article/new">Créer un Article</a>
-                        <?php endif ?>
-                        <a class="nav-link" href="user.php">Ma Page</a>
+                        <a class="nav-link" aria-current="page" href="/">Accueil</a>
+                        <?php include('Views/auth/nav.php') ?>
                     </div>
                 </div>
                 <div class="container w-50">
-                    <div class="d-flex justify-content-around align-items-center">
-                        <a href="/stage/blog/index.php/inscription" class="btn btn-large btn-info h-25">S'inscrire</a>
-                        <form action="./index.php/login" method="POST" class="d-flex flex-column">
-                            <?php if ($session->get('admin') != true) : ?>
-                                <input type="text" name="email" placeholder="Email">
-                                <input type="password" name="mdp" placeholder="Mot de passe">
-                                <button class="btn btn-info" type="submit" name="connexion">Connexion</button>
-                            <?php else : ?>
-                                <a href="/stage/blog/index.php/deconnexion" class="btn btn-info" type="submit" name="deconnexion">Déconnexion</a>
-                            <?php endif ?>
-                        </form>
+                    <div class="d-flex justify-content-around align-items-center py-2">
+                        <?php if ($session->get('admin') != true && $session->get('user') != true) : ?>
+                            <a href="index.php/inscription" class="btn btn-large btn-info h-25">S'inscrire</a>
+                        <?php endif ?>
+                        <?php include('auth/login.php') ?>
+
                     </div>
                 </div>
 
@@ -53,11 +45,11 @@ $session = new Session();
     </header>
 
     <?php
-    echo $content;
+    //echo $content;
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./public/js/popup.js"></script>
+    <script type="text/javascript" src="../public/js/app.js"></script>
 </body>
 
 

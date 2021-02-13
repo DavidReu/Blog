@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-define("ROOT", '/Applications/MAMP/htdocs/stage/blog/');
+//define("ROOT", '/');
 
 //---------- Require ----------
 require_once('vendor/autoload.php');
@@ -9,9 +9,11 @@ require_once('vendor/autoload.php');
 
 //---------- Use ----------
 use App\Controllers\ArticleController;
+use App\Controllers\CommentaireController;
 use App\Controllers\UserController;
-//use Symfony\Component\HttpFoundation\File\File;
+use App\Models\CommentaireModel;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 //--------------------------
 
@@ -21,57 +23,52 @@ $uri = $request->getPathInfo();
 //---------- SESSION ----------
 $session = new Session();
 $session->get('admin', false);
-if ($session->get('admin') == true) {
+$session->get('user', false);
+$session->get('userId', null);
+if ($session->get('admin') == true || $session->get('user') == true) {
     foreach ($session->getFlashBag()->get('notice', []) as $message) {
-        echo '<div id="successMessage" class="alert alert-success text-center">' . $message . '</div>';
+        include('Views/auth/messagelog.php');
     }
 }
 //-----------------------------
 
-//var_dump($uri);
-//var_dump($request->get('deconnexion'));
+
 
 
 $articleController = new ArticleController();
 $userController = new UserController();
 
 
-/* $connexion = $request->request->get('connexion');
-$deconnexion = $request->request->get('deconnexion'); */
-//$delete = $request->request->get('delete');
-//$id = $request->query->get('id');
-/* if (isset($connexion)) {
-    $mail = $request->request->get('email');
-    $mdp = $request->request->get('mdp');
-    $user->login($mail, $mdp);
-} */
+/* --------- Autre router possible -----------
+$string = 'App\Controllers\ArticleController@home';
+//dd(explode('@', $string));
+$tab = explode('@', $string);
+//dd($tab);
+$controller1 = new $tab[0]();
+$method1 = $tab[1];
+------------------------------------------- */
 
-// connexion en tant qu'admin
-if ($uri == "/login") {
-    $userController->login($request);
-}
-//déconnexion et retour sur la page d'accueil
-if ($uri == "/deconnexion") {
-    $userController->logout($request);
-}
-//suppression d'un article
-if ($uri == "/delete") {
-    $articleController->delete($request);
-}
 
-//affichage de la liste des articles quand on est sur la page d'accueil
-if ($uri == '/') {
-    $articleController->home();
-}
-//affichage d'un seul article après avoir cliqué sur le bouton lire article
-if ($uri == "/article") {
-    $articleController->showArticle($request);
-}
-//page de création d'un article par un admin
-if ($uri == '/article/new') {
-    $articleController->createForm($request);
-}
-//page de modification d'un article toujours par un admin
-if ($uri == "/article/update") {
-    $articleController->formUpdate($request);
+$map = [
+    '/login' => ['controller' => UserController::class, 'method' => 'login'],
+    '/deconnexion' => ['controller' => UserController::class, 'method' => 'logout'],
+    '/delete' => ['controller' => ArticleController::class, 'method' => 'delete'],
+    '/' => ['controller' => ArticleController::class, 'method' => 'home'],
+    '/article' => ['controller' => ArticleController::class, 'method' => 'showArticle'],
+    '/article/new' => ['controller' =>  ArticleController::class, 'method' => 'createForm'],
+    '/article/update' => ['controller' => ArticleController::class, 'method' => 'formUpdate'],
+    '/inscription' => ['controller' => UserController::class, 'method' => 'register'],
+    '/commentaire' => ['controller' => CommentaireController::class, 'method' => 'createCom'],
+    '/list/users' => ['controller' => UserController::class, 'method' => 'showUsers'],
+    '/list/comments' => ['controller' => CommentaireController::class, 'method' => 'showAllComments'],
+    '/users' => ['controller' => UserController::class, 'method' => 'getUsers']
+];
+
+
+if (isset($map[$uri])) {
+    $controller = new $map[$uri]['controller']();
+    $method = $map[$uri]['method'];
+    $controller->$method($request);
+} else {
+    new Response("Aucune page n'a été trouvé", 404);
 }

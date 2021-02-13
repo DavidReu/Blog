@@ -2,22 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Model;
 
-class ArticleModel
+class ArticleModel extends Model
 {
-    public $pdo;
-
-    public function __construct($pdo)
-    {
-        $this->pdo = $pdo;
-    }
-
 
     public function create($titre, $contenu, $img)
     {
 
         try {
-            $requete = $this->pdo->prepare('INSERT INTO `blogs`(`titre`, `contenu`, `user_id`, `img_url`) VALUES (:titre, :contenu, :userId, :img)');
+            $requete = $this->pdo->prepare('INSERT INTO articles(`titre`, `contenu`, `user_id`, `img_url`) VALUES (:titre, :contenu, :userId, :img)');
             $requete->execute(array(
                 'titre' => $titre,
                 'contenu' => $contenu,
@@ -39,7 +33,7 @@ class ArticleModel
 
     public function update($id, $titre, $contenu, $img)
     {
-        $req_up = $this->pdo->prepare("UPDATE `articles` SET`titre`= :titre,`contenu`= :contenu,`img_url`= :img WHERE id=$id");
+        $req_up = $this->pdo->prepare("UPDATE articles SET titre= :titre,contenu= :contenu,img_url= :img WHERE id=$id");
         $req_up->execute(array(
             'titre' => $titre,
             'contenu' => $contenu,
