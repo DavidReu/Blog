@@ -11,14 +11,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UserController extends Controller
 {
-    /* private $request;
-    public function __construct()
-    {
-        $this->request = new Request();
-    } */
-
-
-
     public function login(Request $request)
     {
         $mail = $request->request->get('email');
@@ -77,7 +69,6 @@ class UserController extends Controller
     {
         $userModel = new UserModel();
         $users = $userModel->getUsers();
-        //dd($users);
         $this->render('listUsers', ['users' => $users]);
     }
 
@@ -92,8 +83,6 @@ class UserController extends Controller
 
     public function getUsers(Request $request)
     {
-        //dd($request);
-
         if ($request->getMethod() == "GET") {
             $userModel = new UserModel();
             $users = $userModel->getUsers();
@@ -108,11 +97,4 @@ class UserController extends Controller
             $jsonResponse->send();
         }
     }
-
-
-    /* public function update($id, $mdp)
-    {
-        $userModel = new UserModel();
-        $user = $userModel->update($id, $mdp);
-    } */
 }

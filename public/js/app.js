@@ -50,7 +50,24 @@ setTimeout(function(){
 //-----------------------------------------------------
 
 
-
+setTimeout(function(){
+  const deleteButtons = document.querySelectorAll(".deleteComment")
+    console.log(deleteButtons);
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', async function(event){
+        event.preventDefault();
+        commentId  = button.value;
+        console.log(document.querySelector(`.rowComment-${commentId}`))
+          const response = await fetch('https://blog.ddev.site/comments?id='+ commentId, {
+            method : "DELETE"  
+          })
+          const message = await response.json()
+          console.log(message);
+          const rowComment = document.querySelector(`.rowComment-${commentId}`)
+          rowComment.remove();
+      })
+    });
+},2000);
 
 /* const todo =  fetch('https://jsonplaceholder.typicode.com/todos/1')
   .then(response => response.json())

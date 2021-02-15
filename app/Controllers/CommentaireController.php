@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class CommentaireController extends Controller
 {
@@ -19,8 +21,6 @@ class CommentaireController extends Controller
         $articleId = $request->request->get('id');
         $userId = intval($userId);
         $articleId = intval($articleId);
-        //dd($request);
-        //dd($userId);
         $commentaireModel = new CommentaireModel();
         $poster = $request->request->get('poster');
         if (isset($poster)) {
@@ -37,5 +37,22 @@ class CommentaireController extends Controller
         $comments = $commentaireModel->getAllComments();
         //dd($comments);
         $this->render('commentaires/listComment', ['comments' => $comments]);
+    }
+
+    public function getComments(Request $request)
+    {
+        if ($request->getMethod() == "GET") {
+            $commentModel = new CommentaireModel();
+            $comments = $commentModel->getComments();
+            $jsonResponse = new JsonResponse($comments);
+            $jsonResponse->send();
+        }
+        if ($request->getMethod() == "DELETE") {
+            $commentModel = new CommentaireModel();
+            $id = $request->query->get('id');
+            $delete = $commentModel->deleteComment($id);
+            $jsonResponse = new JsonResponse(['success' => 'Tout c\'est bien passé'], 200);
+            $jsonResponse->send();
+        }
     }
 }

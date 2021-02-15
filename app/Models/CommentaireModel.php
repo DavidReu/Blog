@@ -29,4 +29,17 @@ class CommentaireModel extends Model
         $comments = $query->fetchAll(\PDO::FETCH_ASSOC);
         return $comments;
     }
+
+    public function getComments()
+    {
+        $query = $this->pdo->query("SELECT * FROM `commentaires`");
+        $comments = $query->fetchAll(\PDO::FETCH_ASSOC);
+        return $comments;
+    }
+
+    public function deleteComment($id)
+    {
+        $req_delete = "DELETE FROM commentaires WHERE id=$id";
+        $this->pdo->exec($req_delete);
+    }
 }

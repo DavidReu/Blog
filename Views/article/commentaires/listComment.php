@@ -16,14 +16,16 @@
                 </thead>
                 <tbody>
                     <?php foreach ($comments as $key => $value) : ?>
-                        <tr>
+                        <tr class="rowComment-<?php echo $value['id'] ?>">
                             <td><?php echo $value['nom'] ?></td>
                             <td><?php echo $value['prenom'] ?></td>
                             <td><?php echo $value['content'] ?></td>
                             <td><?php echo $value['titre'] ?></td>
-                            <td class="d-flex justify-content-around">
-                                <input type="submit" class="btn btn-info" value="Modifier">
-                                <input type="submit" class="btn btn-info" value="Supprimer">
+                            <td>
+                                <form action="" class="d-flex justify-content-around">
+                                    <input type="submit" class="btn btn-info" value="Modifier">
+                                    <button class="deleteComment btn btn-info" type="submit" name="delete" value="<?php echo $value['id'] ?>">Supprimer</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach ?>
@@ -32,7 +34,3 @@
         </div>
     </div>
 </div>
-
-<table class="table table-striped">
-    ...
-</table>

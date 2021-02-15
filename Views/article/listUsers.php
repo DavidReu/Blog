@@ -23,7 +23,7 @@
                                 <form action="" class="d-flex justify-content-around">
                                     <input type="hidden" name="userId" value="<?php echo $value['id'] ?>">
                                     <input type="submit" class="btn btn-info" name="update" value="Modifier">
-                                    <input class="deleteUser" type="submit" class="btn btn-info" name="delete" placeholder="Supprimer" value="<?php echo $value['id'] ?>">
+                                    <button class="deleteUser btn btn-info" type="submit" name="delete" value="<?php echo $value['id'] ?>">Supprimer</button>
                                 </form>
                             </td>
                         </tr>
@@ -33,7 +33,3 @@
         </div>
     </div>
 </div>
-
-<table class="table table-striped">
-    ...
-</table>
