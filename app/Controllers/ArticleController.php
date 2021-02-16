@@ -25,7 +25,7 @@ class ArticleController extends Controller
         $articleModel = new ArticleModel();
         $commentaireModel = new CommentaireModel();
         $article = $articleModel->getArticleById($id);
-        $commentaires = $commentaireModel->getCommentsByArticle($id);
+        $commentaires = $commentaireModel->showCommentsByArticle($id);
         $results = ['article' => $article, 'commentaires' => $commentaires];
         $this->render('single', $results);
     }

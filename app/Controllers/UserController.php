@@ -97,4 +97,21 @@ class UserController extends Controller
             $jsonResponse->send();
         }
     }
+
+    public function updateUser(Request $request)
+    {
+        $userModel = new UserModel();
+        $id = $request->query->get('id');
+        $user = $userModel->getUser($id);
+        $modifier = $request->get('modifier');
+
+        if (isset($modifier)) {
+            $nom = $request->request->get('nom');
+            $prenom = $request->request->get('prenom');
+            $mail = $request->request->get('mail');
+            $userModel->updateUser($id, $nom, $prenom, $mail);
+            $user = $userModel->getUser($id);
+        }
+        $this->render('userUpdate', ['user' => $user]);
+    }
 }

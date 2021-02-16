@@ -8,6 +8,7 @@ use App\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Models\ArticleModel;
 
 
 class CommentaireController extends Controller
@@ -31,12 +32,22 @@ class CommentaireController extends Controller
         (new RedirectResponse("index.php"))->send();
     }
 
-    public function showAllComments()
+    public function showAllComments(Request $request)
     {
+        $articleModel = new ArticleModel();
+        $articles = $articleModel->getAllArticle();
         $commentaireModel = new CommentaireModel();
         $comments = $commentaireModel->getAllComments();
-        //dd($comments);
-        $this->render('commentaires/listComment', ['comments' => $comments]);
+        $articleId = $request->get('article');
+        if (isset($articleId)) {
+            //dd($articleId);
+            $comments = $commentaireModel->getAllCommentsByArticle($articleId);
+            //dd($comments);
+            if ($comments == null) {
+                $comments = $commentaireModel->getAllComments();
+            }
+        }
+        $this->render('commentaires/listComment', ['comments' => $comments, 'articles' => $articles]);
     }
 
     public function getComments(Request $request)

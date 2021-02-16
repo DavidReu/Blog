@@ -38,6 +38,13 @@ class UserModel extends Model
         return $users;
     }
 
+    public function getUser($id)
+    {
+        $query = $this->pdo->query("SELECT * FROM users WHERE id=$id");
+        $user = $query->fetch(\PDO::FETCH_OBJ);
+        return $user;
+    }
+
     public function updateUser($id, $nom, $prenom, $mail)
     {
         $req_up = $this->pdo->prepare("UPDATE users SET nom= :nom, prenom= :prenom, mail= :mail WHERE id=$id");

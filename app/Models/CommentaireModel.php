@@ -16,23 +16,35 @@ class CommentaireModel extends Model
         ));
     }
 
-    public function getCommentsByArticle($articleId)
+    public function showCommentsByArticle($articleId)
     {
         $query = $this->pdo->query("SELECT * FROM users  INNER JOIN commentaires ON users.id = commentaires.usersId WHERE articleId=$articleId");
         $commentaires = $query->fetchAll(\PDO::FETCH_ASSOC);
         return $commentaires;
     }
 
-    public function getAllComments()
+    public function getAllComments(): array
     {
-        $query = $this->pdo->query("SELECT * FROM commentaires  INNER JOIN users ON commentaires.usersId = users.id INNER JOIN articles ON commentaires.articleId = articles.id");
+        $query = $this->pdo->query("SELECT a.titre, u.prenom, u.nom, c.content, c.id, a.id AS articleid, u.id AS userid  FROM commentaires AS c  INNER JOIN users AS u ON c.usersId = u.id INNER JOIN articles AS a ON c.articleId = a.id");
         $comments = $query->fetchAll(\PDO::FETCH_ASSOC);
         return $comments;
     }
 
+    public function getAllCommentsByArticle($id): ?array
+    {
+        if (is_numeric($id)) {
+            $queryArticles = $this->pdo->query("SELECT id FROM articles WHERE id=$id");
+            $artticles = $queryArticles->fetch(\PDO::FETCH_ASSOC);
+            $query = $this->pdo->query("SELECT a.titre, u.prenom, u.nom, c.content, c.id, a.id AS articleid, u.id AS userid  FROM commentaires AS c  INNER JOIN users AS u ON c.usersId = u.id INNER JOIN articles AS a ON c.articleId = a.id WHERE articleid=$id");
+            $comments = $query->fetchAll(\PDO::FETCH_ASSOC);
+            return $comments;
+        }
+        return null;
+    }
+
     public function getComments()
     {
-        $query = $this->pdo->query("SELECT * FROM `commentaires`");
+        $query = $this->pdo->query("SELECT * FROM commentaires");
         $comments = $query->fetchAll(\PDO::FETCH_ASSOC);
         return $comments;
     }
