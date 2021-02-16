@@ -55,6 +55,17 @@ class UserModel extends Model
         ]);
     }
 
+    public function updateProfil($id, $nom, $prenom, $mail, $mdp)
+    {
+        $req_up = $this->pdo->prepare("UPDATE users sET nom= :nom, prenom= :prenom, mail= :mail, mdp= :mdp WHERE id=$id");
+        $req_up->execute([
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'mail' => $mail,
+            'mdp' => $mdp
+        ]);
+    }
+
     public function deleteUser($id)
     {
         $req_delete = "DELETE FROM users WHERE id=$id";

@@ -23,6 +23,13 @@ class CommentaireModel extends Model
         return $commentaires;
     }
 
+    public function showCommentsByUser($userId)
+    {
+        $query = $this->pdo->query("SELECT content FROM commentaires WHERE usersId=$userId");
+        $comments = $query->fetchAll(\PDO::FETCH_ASSOC);
+        return $comments;
+    }
+
     public function getAllComments(): array
     {
         $query = $this->pdo->query("SELECT a.titre, u.prenom, u.nom, c.content, c.id, a.id AS articleid, u.id AS userid  FROM commentaires AS c  INNER JOIN users AS u ON c.usersId = u.id INNER JOIN articles AS a ON c.articleId = a.id");

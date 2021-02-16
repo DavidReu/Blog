@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
+use App\Models\CommentaireModel;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Models\UserModel;
@@ -20,8 +21,6 @@ class UserController extends Controller
         $userModel = new UserModel();
         $user = $userModel->log($mail);
         $userId = $user->id;
-        var_dump($mail);
-        var_dump($mdp);
 
         if ($mail == $user->mail && password_verify($mdp, $user->mdp) == true) {
             $session = new Session();
@@ -113,5 +112,36 @@ class UserController extends Controller
             $user = $userModel->getUser($id);
         }
         $this->render('userUpdate', ['user' => $user]);
+    }
+
+    public function getUserProfil()
+    {
+        $session = new Session();
+        $userId = $session->get('userId');
+        $userModel = new UserModel();
+        $profil = $userModel->getUser($userId);
+        $commentModel = new CommentaireModel();
+        $comments = $commentModel->showCommentsByUser($userId);
+        //dd($profil, $comments);
+        $this->render('userProfil', ['profil' => $profil, 'comments' => $comments]);
+    }
+
+    public function updateProfil(Request $request)
+    {
+        $userModel = new UserModel();
+        $session = new Session();
+        $id = $session->get('userId');
+        $user = $userModel->getUser($id);
+        $modifier = $request->get('modifier');
+
+        if (isset($modifier)) {
+            $nom = $request->request->get('nom');
+            $prenom = $request->request->get('prenom');
+            $mail = $request->request->get('mail');
+            $mdp = $request->request->get('pwd');
+            $userModel->updateUser($id, $nom, $prenom, $mail, $mdp);
+            $user = $userModel->getUser($id);
+        }
+        $this->render('updateProfil', ['user' => $user]);
     }
 }

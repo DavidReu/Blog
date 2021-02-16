@@ -63,7 +63,9 @@ $map = [
     '/list/comments' => ['controller' => CommentaireController::class, 'method' => 'showAllComments'],
     '/users' => ['controller' => UserController::class, 'method' => 'getUsers'],
     '/comments' => ['controller' => CommentaireController::class, 'method' => 'getComments'],
-    '/userUpdate' => ['controller' => UserController::class, 'method' => 'updateUser']
+    '/userUpdate' => ['controller' => UserController::class, 'method' => 'updateUser'],
+    '/profil' => ['controller' => UserController::class, 'method' => 'getUserProfil'],
+    '/profil/modifier' => ['controller' => UserController::class, 'method' => 'updateProfil']
 ];
 
 
