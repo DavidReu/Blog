@@ -65,7 +65,8 @@ $map = [
     '/comments' => ['controller' => CommentaireController::class, 'method' => 'getComments'],
     '/userUpdate' => ['controller' => UserController::class, 'method' => 'updateUser'],
     '/profil' => ['controller' => UserController::class, 'method' => 'getUserProfil'],
-    '/profil/modifier' => ['controller' => UserController::class, 'method' => 'updateProfil']
+    '/profil/modifier' => ['controller' => UserController::class, 'method' => 'updateProfil'],
+    '/updateComment' => ['controller' => CommentaireController::class, 'method' => 'updateComment']
 ];
 
 
@@ -75,4 +76,5 @@ if (isset($map[$uri])) {
     $controller->$method($request);
 } else {
     new Response("Aucune page n'a été trouvé", 404);
+    echo "Erreur 404 cette page n'existe pas";
 }

@@ -24,7 +24,7 @@
         <section>
             <ul>
                 <?php foreach ($comments as $key => $value) : ?>
-                    <li><?php echo $value['content'] ?></li>
+                    <li><?php echo $value['content'] ?> <a href="/article?id=<?php echo $value['articleId'] ?>">Voir l'article</a></li>
                 <?php endforeach ?>
             </ul>
         </section>

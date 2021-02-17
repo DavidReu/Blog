@@ -34,6 +34,32 @@ $session = new Session(); ?>
                     <span>Par : <?php echo $valeur['nom'] ?></span>
                     <span><?php echo $valeur['prenom'] ?></span>
                 </div>
+                <?php if ($session->get("userId") == $valeur['usersId']) : ?>
+                    <button class="btn btn-info btn-small my-2" type="button" data-bs-toggle="modal" data-bs-target="#editModal">Editer</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modifier votre commentaire</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="" method="POST">
+                                    <div class="modal-body row text-center justify-content-center">
+                                        <label for="newComment">Entrez votre nouveau commentaire ici</label>
+                                        <textarea class="w-75" type="text" name="newContent" rows="3" placeholder="<?php echo $valeur['content'] ?>"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                        <input type="hidden" name="commentId" value="<?php echo $valeur['id'] ?>">
+                                        <input type="submit" class="btn btn-primary" name="editComment" value="Enregistrer modification">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin Modal-->
+                <?php endif ?>
             </div>
         <?php } ?>
     </div>

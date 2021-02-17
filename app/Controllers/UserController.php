@@ -64,10 +64,11 @@ class UserController extends Controller
         $this->render('formRegister', ['user' => '']);
     }
 
-    public function showUsers()
+    public function showUsers(Request $request)
     {
         $userModel = new UserModel();
         $users = $userModel->getUsers();
+        //dd($request);
         $this->render('listUsers', ['users' => $users]);
     }
 
@@ -92,6 +93,7 @@ class UserController extends Controller
             $userModel = new UserModel();
             $id = $request->query->get('id');
             $delete = $userModel->deleteUser($id);
+            dd($request);
             $jsonResponse = new JsonResponse(['success' => 'Tout c\'est bien passé'], 200);
             $jsonResponse->send();
         }

@@ -29,7 +29,6 @@ const check = function() {
 // fonction supprimer utilisant AJAX 
 // setimeout obligatoire pour le moment pour attendre le chargement de la page
 setTimeout(function(){
-  
   const deleteButtons = document.querySelectorAll(".deleteUser")
   console.log(deleteButtons);
   deleteButtons.forEach(button => {

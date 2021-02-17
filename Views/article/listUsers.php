@@ -22,7 +22,7 @@
                             <td>
                                 <form action="" class="d-flex justify-content-around">
                                     <input type="hidden" name="userId" value="<?php echo $value['id'] ?>">
-                                    <a class="btn btn-info" href="/userUpdate?id=<?php echo $value['id'] ?>">Modifier</a>
+                                    <!-- <a class="btn btn-info" href="/userUpdate?id=<?php// echo $value['id'] ?>">Modifier</a> -->
                                     <button class="deleteUser btn btn-info" type="submit" name="delete">Supprimer</button>
                                 </form>
                             </td>

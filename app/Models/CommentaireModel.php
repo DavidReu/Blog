@@ -25,7 +25,7 @@ class CommentaireModel extends Model
 
     public function showCommentsByUser($userId)
     {
-        $query = $this->pdo->query("SELECT content FROM commentaires WHERE usersId=$userId");
+        $query = $this->pdo->query("SELECT content, articleId FROM commentaires WHERE usersId=$userId");
         $comments = $query->fetchAll(\PDO::FETCH_ASSOC);
         return $comments;
     }
@@ -60,5 +60,13 @@ class CommentaireModel extends Model
     {
         $req_delete = "DELETE FROM commentaires WHERE id=$id";
         $this->pdo->exec($req_delete);
+    }
+
+    public function updateComment($id, $content)
+    {
+        $req_up = $this->pdo->prepare("UPDATE commentaires SET content= :content WHERE id=$id");
+        $req_up->execute(array(
+            'content' => $content
+        ));
     }
 }

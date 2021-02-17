@@ -66,4 +66,17 @@ class CommentaireController extends Controller
             $jsonResponse->send();
         }
     }
+
+    public function updateComment(Request $request)
+    {
+        $commentModel = new CommentaireModel();
+        $id = $request->get("id");
+        $edit = $request->request->get('editComment');
+
+        if (isset($edit)) {
+            $content = $request->request->get('newContent');
+            $editComment = $commentModel->updateComment($id, $content);
+            return $editComment;
+        }
+    }
 }
