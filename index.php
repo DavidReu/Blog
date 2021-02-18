@@ -29,6 +29,10 @@ if ($session->get('admin') == true || $session->get('user') == true) {
     foreach ($session->getFlashBag()->get('notice', []) as $message) {
         include('Views/auth/messagelog.php');
     }
+} else {
+    foreach ($session->getFlashBag()->get('erreur', []) as $message) {
+        include('Views/auth/messagelog.php');
+    }
 }
 //-----------------------------
 

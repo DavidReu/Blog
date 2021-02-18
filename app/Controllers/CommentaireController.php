@@ -40,9 +40,7 @@ class CommentaireController extends Controller
         $comments = $commentaireModel->getAllComments();
         $articleId = $request->get('article');
         if (isset($articleId)) {
-            //dd($articleId);
             $comments = $commentaireModel->getAllCommentsByArticle($articleId);
-            //dd($comments);
             if ($comments == null) {
                 $comments = $commentaireModel->getAllComments();
             }
@@ -70,12 +68,13 @@ class CommentaireController extends Controller
     public function updateComment(Request $request)
     {
         $commentModel = new CommentaireModel();
-        $id = $request->get("id");
         $edit = $request->request->get('editComment');
         if (isset($edit)) {
+            $id = $request->request->get('commentId');
+            $articleId = $request->request->get("articleId");
             $content = $request->request->get('newContent');
             $editComment = $commentModel->updateComment($id, $content);
-            return $editComment;
         }
+        (new RedirectResponse("/article?id=" . $articleId))->send();
     }
 }

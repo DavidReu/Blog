@@ -44,7 +44,7 @@ $session = new Session(); ?>
                                     <h5 class="modal-title" id="exampleModalLabel">Modifier votre commentaire</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form action="" method="POST">
+                                <form action="updateComment" method="POST">
                                     <div class="modal-body row text-center justify-content-center">
                                         <label for="newComment">Entrez votre nouveau commentaire ici</label>
                                         <textarea class="w-75" type="text" name="newContent" rows="3" placeholder="<?php echo $valeur['content'] ?>"></textarea>
@@ -52,6 +52,7 @@ $session = new Session(); ?>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                                         <input type="hidden" name="commentId" value="<?php echo $valeur['id'] ?>">
+                                        <input type="hidden" name="articleId" value="<?php echo $valeur['articleId'] ?>">
                                         <input type="submit" class="btn btn-primary" name="editComment" value="Enregistrer modification">
                                     </div>
                                 </form>

@@ -1,8 +1,8 @@
 // --------------- Fonction message connexion ------------
-const successMessage = document.getElementById("successMessage");
-if(successMessage){
+const messageLog = document.getElementById("messageLog");
+if(messageLog){
     setTimeout(function(){
-        successMessage.remove();
+      messageLog.remove();
     },2000);
 }
 
@@ -30,19 +30,21 @@ const check = function() {
 // setimeout obligatoire pour le moment pour attendre le chargement de la page
 setTimeout(function(){
   const deleteButtons = document.querySelectorAll(".deleteUser")
-  console.log(deleteButtons);
+  //console.log(deleteButtons);
   deleteButtons.forEach(button => {
     button.addEventListener('click', async function(event){
       event.preventDefault();
       userId  = button.value;
-      console.log(document.querySelector(`.rowUser-${userId}`))
+      //console.log(document.querySelector(`.rowUser-${userId}`))
         const response = await fetch('https://blog.ddev.site/users?id='+ userId, {
           method : "DELETE"  
         })
         const message = await response.json()
-        console.log(message);
+        //console.log(message);
         const rowUser = document.querySelector(`.rowUser-${userId}`)
+        console.log(rowUser);
         rowUser.remove();
+        window.alert('bonjour');
     })
   });
 },2000);
@@ -51,17 +53,14 @@ setTimeout(function(){
 
 setTimeout(function(){
   const deleteButtons = document.querySelectorAll(".deleteComment")
-    console.log(deleteButtons);
     deleteButtons.forEach(button => {
       button.addEventListener('click', async function(event){
         event.preventDefault();
         commentId  = button.value;
-        console.log(document.querySelector(`.rowComment-${commentId}`))
           const response = await fetch('https://blog.ddev.site/comments?id='+ commentId, {
             method : "DELETE"  
           })
           const message = await response.json()
-          console.log(message);
           const rowComment = document.querySelector(`.rowComment-${commentId}`)
           rowComment.remove();
       })

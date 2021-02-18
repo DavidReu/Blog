@@ -32,6 +32,10 @@ class UserController extends Controller
             $session->set('userId', $userId);
             $session->getFlashBag()->add('notice', 'Vous êtes connecté');
             (new RedirectResponse("/"))->send();
+        } else {
+            $session = new Session();
+            $session->getFlashBag()->add('erreur', 'Erreur de connexion');
+            (new RedirectResponse("/"))->send();
         }
     }
 
@@ -64,22 +68,12 @@ class UserController extends Controller
         $this->render('formRegister', ['user' => '']);
     }
 
-    public function showUsers(Request $request)
+    public function showUsers()
     {
         $userModel = new UserModel();
         $users = $userModel->getUsers();
-        //dd($request);
         $this->render('listUsers', ['users' => $users]);
     }
-
-    /* public function getUsers(Request $request)
-    {
-        dd($request);
-        $userModel = new UserModel();
-        $users = $userModel->getUsers();
-        $jsonResponse = new JsonResponse($users);
-        $jsonResponse->send();
-    } */
 
     public function getUsers(Request $request)
     {
@@ -95,6 +89,7 @@ class UserController extends Controller
             $delete = $userModel->deleteUser($id);
             dd($request);
             $jsonResponse = new JsonResponse(['success' => 'Tout c\'est bien passé'], 200);
+            dd($jsonResponse);
             $jsonResponse->send();
         }
     }
@@ -124,7 +119,6 @@ class UserController extends Controller
         $profil = $userModel->getUser($userId);
         $commentModel = new CommentaireModel();
         $comments = $commentModel->showCommentsByUser($userId);
-        //dd($profil, $comments);
         $this->render('userProfil', ['profil' => $profil, 'comments' => $comments]);
     }
 

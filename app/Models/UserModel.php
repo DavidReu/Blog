@@ -71,13 +71,4 @@ class UserModel extends Model
         $req_delete = "DELETE FROM users WHERE id=$id";
         $this->pdo->exec($req_delete);
     }
-
-    /* public function update($id, $mdp)
-    {
-        $mdp = password_hash($mdp, PASSWORD_BCRYPT);
-        $req_up = $this->pdo->prepare("UPDATE `users` SET`mdp`= :mdp WHERE id='$id'");
-        $req_up->execute(array(
-            'mdp' => $mdp
-        ));
-    } */
 }
