@@ -44,7 +44,6 @@ setTimeout(function(){
         const rowUser = document.querySelector(`.rowUser-${userId}`)
         console.log(rowUser);
         rowUser.remove();
-        window.alert('bonjour');
     })
   });
 },2000);
@@ -66,45 +65,3 @@ setTimeout(function(){
       })
     });
 },2000);
-
-/* const todo =  fetch('https://jsonplaceholder.typicode.com/todos/1')
-  .then(response => response.json())
-  .then(json => console.log(json))
-
-console.log(todo) */
-
-
-/*const a = async function(){
-  /* const todoToSave = {
-    userId : '5',
-    title : 'Bonjour',
-    completed : false
-  }; 
-  const response = await fetch('https://blog.ddev.site/users' , {
-    method : "GET"  
-  })
-  const responseJson = await response.json()
-  const users = await responseJson
-  console.log(users)
-  const body = document.querySelector('body')
-  
-  /* for(let i = 0; i < users.length; i++){
-    const div = document.createElement('div')
-    const h4 = document.createElement('h4')
-    div.classList.add("container")
-    h4.innerHTML = `${users[i].nom} ${users[i].prenom}`;
-    div.append(h4)
-    body.append(div)
-  } 
-
-  users.forEach(user => {
-    const div = document.createElement('div')
-    const h4 = document.createElement('h4')
-    div.classList.add("container")
-    h4.innerHTML = `${user.nom} ${user.prenom}`;
-    div.append(h4)
-    body.append(div)
-  });
-  
-}
-a();*/

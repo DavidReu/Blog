@@ -68,11 +68,20 @@ class UserController extends Controller
         $this->render('formRegister', ['user' => '']);
     }
 
-    public function showUsers()
+    public function showUsers(Request $request)
     {
         $userModel = new UserModel();
         $users = $userModel->getUsers();
         $this->render('listUsers', ['users' => $users]);
+
+        if ($request->getMethod() == "DELETE") {
+            $userModel = new UserModel();
+            $id = $request->query->get('id');
+            $delete = $userModel->deleteUser($id);
+            $jsonResponse = new JsonResponse(['success' => 'Tout c\'est bien passé'], 200);
+            json_encode($jsonResponse);
+            $jsonResponse->send();
+        }
     }
 
     public function getUsers(Request $request)
@@ -87,9 +96,8 @@ class UserController extends Controller
             $userModel = new UserModel();
             $id = $request->query->get('id');
             $delete = $userModel->deleteUser($id);
-            dd($request);
             $jsonResponse = new JsonResponse(['success' => 'Tout c\'est bien passé'], 200);
-            dd($jsonResponse);
+            json_encode($jsonResponse);
             $jsonResponse->send();
         }
     }
@@ -100,7 +108,7 @@ class UserController extends Controller
         $id = $request->query->get('id');
         $user = $userModel->getUser($id);
         $modifier = $request->get('modifier');
-
+ 
         if (isset($modifier)) {
             $nom = $request->request->get('nom');
             $prenom = $request->request->get('prenom');

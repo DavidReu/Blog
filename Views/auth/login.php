@@ -4,6 +4,6 @@
         <input type="password" name="mdp" placeholder="Mot de passe">
         <button class="btn btn-info" type="submit" name="connexion">Connexion</button>
     <?php else : ?>
-        <a href="../deconnexion" class="btn btn-info" type="submit" name="deconnexion">Déconnexion</a>
+        <a href="../deconnexion" class="btn btn-info" name="deconnexion">Déconnexion</a>
     <?php endif ?>
 </form>

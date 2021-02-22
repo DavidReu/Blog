@@ -18,7 +18,6 @@ class UserModel extends Model
                 'nom' => $nom,
                 'prenom' => $prenom
             ));
-            echo "Votre inscription est un succès !";
         } catch (\Exception $e) {
             echo "échec de l'enregistrement", $e->getMessage();
         }

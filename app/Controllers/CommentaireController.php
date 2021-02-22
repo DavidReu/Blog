@@ -61,6 +61,7 @@ class CommentaireController extends Controller
             $id = $request->query->get('id');
             $delete = $commentModel->deleteComment($id);
             $jsonResponse = new JsonResponse(['success' => 'Tout c\'est bien passé'], 200);
+            json_encode($jsonResponse);
             $jsonResponse->send();
         }
     }
