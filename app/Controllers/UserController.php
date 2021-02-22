@@ -20,6 +20,7 @@ class UserController extends Controller
         $mdp = $this->valid($mdp);
         $userModel = new UserModel();
         $user = $userModel->log($mail);
+        //dd($user);
         $userId = $user->id;
 
         if ($mail == $user->mail && password_verify($mdp, $user->mdp) == true) {

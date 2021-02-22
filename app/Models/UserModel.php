@@ -25,7 +25,7 @@ class UserModel extends Model
 
     public function log($mail)
     {
-        $query = $this->pdo->query("SELECT * FROM `users` WHERE `mail` = '$mail' ");
+        $query = $this->pdo->query("SELECT * FROM `users` INNER JOIN `role` ON users.id = role.user_id WHERE mail = '$mail' ");
         $user = $query->fetch(\PDO::FETCH_OBJ);
         return $user;
     }
