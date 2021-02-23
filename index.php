@@ -86,7 +86,8 @@ $map = [
     '/userUpdate' => ['controller' => UserController::class, 'method' => 'updateUser'],
     '/profil' => ['controller' => UserController::class, 'method' => 'getUserProfil'],
     '/profil/modifier' => ['controller' => UserController::class, 'method' => 'updateProfil'],
-    '/updateComment' => ['controller' => CommentaireController::class, 'method' => 'updateComment']
+    '/updateComment' => ['controller' => CommentaireController::class, 'method' => 'updateComment'],
+    '/registerEditor' => ['controller' => UserController::class, 'method' => 'registerEditor']
 ];
 
 

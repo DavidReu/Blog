@@ -70,7 +70,8 @@ class UserController extends Controller
             $nom = $this->valid($nom);
             $prenom = $this->valid($prenom);
             $mdp = password_hash($mdp, PASSWORD_BCRYPT);
-            $userModel->register($mail, $mdp, $nom, $prenom);
+            $role = $request->request->get('role');
+            $userModel->register($mail, $mdp, $nom, $prenom, $role);
             $logger->info('Utilisateur bien enregistré');
         } else {
             $logger->error('Erreur lors de l\'enregistrement de l\'utilisateur');
@@ -178,5 +179,9 @@ class UserController extends Controller
             $logger->error('Echec de la modification');
         }
         $this->render('updateProfil', ['user' => $user]);
+    }
+
+    public function registerEditor()
+    {
     }
 }
