@@ -10,6 +10,7 @@
                 <input id="password" class="col-4 my-2" type="password" name="mdp" placeholder="Entrez un mot de passe" onkeyup='check()'></input>
                 <input id="confirmpwd" class="col-4 my-2" type="password" name="confirmpwd" placeholder="Confirmez le mot de passe" onkeyup='check()'></input>
                 <span id='message'></span>
+                <input type="hidden" name="role" value="user">
                 <input type="submit" class="btn btn-info col-1" value="S'inscrire" name="regist">
             </form>
         </div>

@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use App\Models\UserModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\FirePHPHandler;
 
 class UserController extends Controller
 {
@@ -53,6 +56,10 @@ class UserController extends Controller
         $userModel = new UserModel();
         $regist = $request->request->get('regist');
 
+        $logger = new Logger("create_user");
+        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new FirePHPHandler());
+
         if (isset($regist)) {
             $mail = $request->request->get('mail');
             $mdp = $request->request->get('mdp');
@@ -64,6 +71,9 @@ class UserController extends Controller
             $prenom = $this->valid($prenom);
             $mdp = password_hash($mdp, PASSWORD_BCRYPT);
             $userModel->register($mail, $mdp, $nom, $prenom);
+            $logger->info('Utilisateur bien enregistré');
+        } else {
+            $logger->error('Erreur lors de l\'enregistrement de l\'utilisateur');
         }
         $this->render('formRegister', ['user' => '']);
     }
@@ -74,13 +84,20 @@ class UserController extends Controller
         $users = $userModel->getUsers();
         $this->render('listUsers', ['users' => $users]);
 
+        $logger = new Logger("delete_user");
+        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new FirePHPHandler());
+
         if ($request->getMethod() == "DELETE") {
             $userModel = new UserModel();
             $id = $request->query->get('id');
             $delete = $userModel->deleteUser($id);
+            $logger->info('Suppression réussie');
             $jsonResponse = new JsonResponse(['success' => 'Tout c\'est bien passé'], 200);
             json_encode($jsonResponse);
             $jsonResponse->send();
+        } else {
+            $logger->error('Echec de la suppression');
         }
     }
 
@@ -108,13 +125,20 @@ class UserController extends Controller
         $id = $request->query->get('id');
         $user = $userModel->getUser($id);
         $modifier = $request->get('modifier');
- 
+
+        $logger = new Logger("update_user");
+        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new FirePHPHandler());
+
         if (isset($modifier)) {
             $nom = $request->request->get('nom');
             $prenom = $request->request->get('prenom');
             $mail = $request->request->get('mail');
             $userModel->updateUser($id, $nom, $prenom, $mail);
             $user = $userModel->getUser($id);
+            $logger->info('Modification réussie');
+        } else {
+            $logger->error('Eche de la modification');
         }
         $this->render('userUpdate', ['user' => $user]);
     }
@@ -138,6 +162,10 @@ class UserController extends Controller
         $user = $userModel->getUser($id);
         $modifier = $request->get('modifier');
 
+        $logger = new Logger("update_profil");
+        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new FirePHPHandler());
+
         if (isset($modifier)) {
             $nom = $request->request->get('nom');
             $prenom = $request->request->get('prenom');
@@ -145,6 +173,9 @@ class UserController extends Controller
             $mdp = $request->request->get('pwd');
             $userModel->updateUser($id, $nom, $prenom, $mail, $mdp);
             $user = $userModel->getUser($id);
+            $logger->info('Profil bien modifié');
+        } else {
+            $logger->error('Echec de la modification');
         }
         $this->render('updateProfil', ['user' => $user]);
     }
