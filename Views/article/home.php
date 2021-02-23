@@ -22,7 +22,7 @@ foreach ($articles as $key => $valeur) {
             <div>
                 <?php if ($session->get('admin') == false) : ?>
                     <a class="btn btn-info" href="article?id=<?php echo $valeur["id"] ?>">Lire l'article</a>
-                <?php else : ?>
+                <?php elseif ($session->get('admin') == true) : ?>
                     <a class="btn btn-info" href="article/update?id=<?php echo $valeur["id"] ?>">Modifier l'article</a>
                     <form action="delete" method="POST">
                         <input type="hidden" name="id" value="<?php echo $valeur["id"] ?> ">

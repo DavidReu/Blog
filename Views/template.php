@@ -28,7 +28,7 @@ $session = new Session();
                 </div>
                 <div class="container w-50">
                     <div class="d-flex justify-content-around align-items-center py-2">
-                        <?php if ($session->get('admin') != true && $session->get('user') != true) : ?>
+                        <?php if ($session->get('admin') != true && $session->get('user') != true && $session->get('editor') != true) : ?>
                             <a href="index.php/inscription" class="btn btn-large btn-info h-25">S'inscrire</a>
                         <?php endif ?>
                         <?php include('auth/login.php') ?>

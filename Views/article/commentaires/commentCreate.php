@@ -5,4 +5,10 @@
         <input type="hidden" name="id" value="<?php echo $article->id ?>">
         <input type="submit" class="btn btn-info col-3" value="Poster" name="poster">
     </form>
+    <?php if ($session->get('userId') == $article->user_id) { ?>
+        <div class="container d-flex flex-column justify-content-center align-items-center mt-5">
+            <h4>Vous pouvez modifier votre article ici</h4>
+            <a class=" btn btn-info" href="article/update?id=<?php echo $article->id ?>">Modifier l'article</a>
+        </div>
+    <?php } ?>
 </div>

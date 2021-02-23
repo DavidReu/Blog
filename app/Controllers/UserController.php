@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
+use App\Models\ArticleModel;
 use App\Models\CommentaireModel;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -27,8 +28,10 @@ class UserController extends Controller
 
         if ($mail == $user->mail && password_verify($mdp, $user->mdp) == true) {
             $session = new Session();
-            if ($user->is_admin == "1") {
+            if ($user->role == "admin") {
                 $session->set('admin', 'true');
+            } elseif ($user->role == "editor") {
+                $session->set('editor', 'true');
             } else {
                 $session->set('user', 'true');
             }
@@ -65,16 +68,18 @@ class UserController extends Controller
             $mdp = $request->request->get('mdp');
             $nom = $request->request->get('nom');
             $prenom = $request->request->get('prenom');
-            $mail = $this->valid($mail);
-            $mdp = $this->valid($mdp);
-            $nom = $this->valid($nom);
-            $prenom = $this->valid($prenom);
-            $mdp = password_hash($mdp, PASSWORD_BCRYPT);
-            $role = $request->request->get('role');
-            $userModel->register($mail, $mdp, $nom, $prenom, $role);
-            $logger->info('Utilisateur bien enregistré');
-        } else {
-            $logger->error('Erreur lors de l\'enregistrement de l\'utilisateur');
+            if (!empty($mail) && !empty($mdp)) {
+                $mail = $this->valid($mail);
+                $mdp = $this->valid($mdp);
+                $nom = $this->valid($nom);
+                $prenom = $this->valid($prenom);
+                $mdp = password_hash($mdp, PASSWORD_BCRYPT);
+                $role = $request->request->get('role');
+                $userModel->registerEditor($mail, $mdp, $nom, $prenom, $role);
+                $logger->info('Utilisateur bien enregistré');
+            } else {
+                $logger->error('Erreur lors de l\'enregistrement de l\'utilisateur');
+            }
         }
         $this->render('formRegister', ['user' => '']);
     }
@@ -152,7 +157,9 @@ class UserController extends Controller
         $profil = $userModel->getUser($userId);
         $commentModel = new CommentaireModel();
         $comments = $commentModel->showCommentsByUser($userId);
-        $this->render('userProfil', ['profil' => $profil, 'comments' => $comments]);
+        $articleModel = new ArticleModel();
+        $articles = $articleModel->showAriclesByUser($userId);
+        $this->render('userProfil', ['profil' => $profil, 'comments' => $comments, 'articles' => $articles]);
     }
 
     public function updateProfil(Request $request)
@@ -181,7 +188,33 @@ class UserController extends Controller
         $this->render('updateProfil', ['user' => $user]);
     }
 
-    public function registerEditor()
+    public function registerEditor(Request $request)
     {
+        $userModel = new UserModel();
+        $regist = $request->request->get('registEditor');
+
+        $logger = new Logger("create_editor");
+        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new FirePHPHandler());
+        $this->render('formRegisterEditor', ['user' => '']);
+
+        if (isset($regist)) {
+            $mail = $request->request->get('mail');
+            $mdp = $request->request->get('mdp');
+            $nom = $request->request->get('nom');
+            $prenom = $request->request->get('prenom');
+            if (!empty($mail) && !empty($mdp)) {
+                $mail = $this->valid($mail);
+                $mdp = $this->valid($mdp);
+                $nom = $this->valid($nom);
+                $prenom = $this->valid($prenom);
+                $mdp = password_hash($mdp, PASSWORD_BCRYPT);
+                $role = $request->request->get('role');
+                $userModel->registerEditor($mail, $mdp, $nom, $prenom, $role);
+                $logger->info('Utilisateur bien enregistré');
+            } else {
+                $logger->error('Erreur lors de l\'enregistrement de l\'utilisateur');
+            }
+        }
     }
 }

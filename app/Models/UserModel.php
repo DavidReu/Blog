@@ -60,7 +60,7 @@ class UserModel extends Model
     //fonction pour se connecté en récupérant le role
     public function log($mail)
     {
-        $query = $this->pdo->query("SELECT * FROM `users` INNER JOIN `role` ON users.id = role.user_id WHERE mail = '$mail' ");
+        $query = $this->pdo->query("SELECT u.id, u.mail, u.mdp, u.nom, u.prenom, r.role, r.user_id FROM `users` AS u INNER JOIN `role` AS r ON u.id = r.user_id WHERE mail = '$mail' ");
         $user = $query->fetch(\PDO::FETCH_OBJ);
         return $user;
     }
@@ -77,6 +77,13 @@ class UserModel extends Model
         $query = $this->pdo->query("SELECT * FROM users WHERE id=$id");
         $user = $query->fetch(\PDO::FETCH_OBJ);
         return $user;
+    }
+
+    public function getProfil($id)
+    {
+        $query = $this->pdo->query("SELECT u.id, u.mail, u.nom, u.prenom, a.titre, a.user_id, c.content FROM users AS u INNER JOIN articles AS a ON u.id = a.user_id INNER JOIN commentaires  AS c ON u.id = c.usersId WHERE u.id=$id");
+        $profil = $query->fetch(\PDO::FETCH_OBJ);
+        return $profil;
     }
 
     public function updateUser($id, $nom, $prenom, $mail)

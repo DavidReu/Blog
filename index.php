@@ -38,9 +38,10 @@ $uri = $request->getPathInfo();
 //---------- SESSION ----------
 $session = new Session();
 $session->get('admin', false);
+$session->get('editor', false);
 $session->get('user', false);
 $session->get('userId', null);
-if ($session->get('admin') == true || $session->get('user') == true) {
+if ($session->get('admin') == true || $session->get('user') == true || $session->get('editor') == true) {
     foreach ($session->getFlashBag()->get('notice', []) as $message) {
         include('Views/auth/messagelog.php');
     }
