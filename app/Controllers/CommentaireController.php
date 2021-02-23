@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Models\ArticleModel;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\FirePHPHandler;
 
 
 class CommentaireController extends Controller
@@ -16,6 +19,9 @@ class CommentaireController extends Controller
 
     public function createCom(Request $request)
     {
+        $logger = new Logger("create_comment");
+        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new FirePHPHandler());
 
         $session = new Session();
         $userId = $session->get('userId');
@@ -27,7 +33,10 @@ class CommentaireController extends Controller
         if (isset($poster)) {
             $content = $request->request->get('content');
             $content = $this->valid($content);
+            $logger->info('Commentaire bien créé');
             $commentaireModel->create($content, $articleId, $userId);
+        } else {
+            $logger->error('Erreur lors de la création d\'un commentaire');
         }
         (new RedirectResponse("index.php"))->send();
     }
@@ -68,13 +77,20 @@ class CommentaireController extends Controller
 
     public function updateComment(Request $request)
     {
+        $logger = new Logger("update_comment");
+        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new FirePHPHandler());
+
         $commentModel = new CommentaireModel();
         $edit = $request->request->get('editComment');
         if (isset($edit)) {
             $id = $request->request->get('commentId');
             $articleId = $request->request->get("articleId");
             $content = $request->request->get('newContent');
+            $logger->info('Commentaire bien modifié');
             $editComment = $commentModel->updateComment($id, $content);
+        } else {
+            $logger->error('Echec de la moficiation');
         }
         (new RedirectResponse("/article?id=" . $articleId))->send();
     }

@@ -1,0 +1,7 @@
+[2021-02-23T04:26:13.483975+00:00] create_article.INFO: Tout va bien [] []
+[2021-02-23T04:26:13.495985+00:00] create_article.ERROR: Aucune données envoyées [] []
+[2021-02-23T04:26:13.496892+00:00] create_article.CRITICAL: Erreur [] []
+[2021-02-23T04:30:23.712889+00:00] my_logger.INFO: Tout va bien [] []
+[2021-02-23T04:32:10.344376+00:00] my_logger.ERROR: Aucune données envoyées [] []
+[2021-02-23T04:32:10.349395+00:00] my_logger.CRITICAL: Erreur [] []
+[2021-02-23T04:32:30.491435+00:00] my_logger.INFO: Tout va bien [] []

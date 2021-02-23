@@ -18,8 +18,8 @@ $logger->pushHandler(new StreamHandler(__DIR__ . '/my_app.log', Logger::DEBUG));
 $logger->pushHandler(new FirePHPHandler());
 
 // You can now use your logger
-$logger->info('My logger is now ready');
-dd($logger);
+/* $logger->info('My logger is now ready');
+dd($logger); */
 
 
 //---------- Use ----------

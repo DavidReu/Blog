@@ -17,13 +17,6 @@ use Monolog\Handler\FirePHPHandler;
 
 class ArticleController extends Controller
 {
-    public function index(Logger $logger)
-    {
-        $logger->info('Tout va bien');
-        $logger->error('Je ne peux pas trouver la voiture');
-        $logger->critical(' Ça ne marche pas !');
-    }
-
     public function home()
     {
         $articleModel = new ArticleModel();
@@ -33,6 +26,10 @@ class ArticleController extends Controller
 
     public function showarticle(Request $request)
     {
+        $logger = new Logger("show_article");
+        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new FirePHPHandler());
+
         $id = $request->get('id');
         if (isset($id)) {
             $articleModel = new ArticleModel();
@@ -40,11 +37,10 @@ class ArticleController extends Controller
             $article = $articleModel->getArticleById($id);
             $commentaires = $commentaireModel->showCommentsByArticle($id);
             $results = ['article' => $article, 'commentaires' => $commentaires];
+            $logger->info('Les données de l\'article ont bien été récupérées');
             $this->render('single', $results);
         } else {
-            $jsonResponse = new JsonResponse(['success' => false, 'message' => 'aucune donnée renvoyée', "bg-color" => "bg-danger"], 200);
-            $response = ['success' => false, 'message' => 'aucune donnée renvoyéé', 'bg-color' => 'bg-danger', 'statut' => 200];
-            $this->render('single', ['response' => $response]);
+            $logger->error('Aucune données envoyées');
         }
     }
 
@@ -60,6 +56,10 @@ class ArticleController extends Controller
         $poster = $request->get('poster');
         $longeur = strlen($request->request->get('titre'));
 
+        $logger = new Logger("create_article");
+        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new FirePHPHandler());
+
         if ($longeur > 0) {
             $titre = $request->request->get('titre');
             $contenu = $request->request->get('contenu');
@@ -67,22 +67,19 @@ class ArticleController extends Controller
             $contenu = $this->valid($contenu);
             $img = $_FILES['img']['name'];
             $dossier = 'upload/';
+            $logger->info('Tout va bien');
             if (!empty($_FILES["img"]["tmp_name"])) {
                 move_uploaded_file($_FILES["img"]["tmp_name"], $dossier . $img);
                 $fichier = '/upload' . '/' . $img;
             } else {
-                $jsonResponse = new JsonResponse(['success' => false, 'message' => 'aucune donnée renvoyée', "bg-color" => "bg-danger"], 200);
+                $logger->error('Aucune images envoyées');
+                /* $jsonResponse = new JsonResponse(['success' => false, 'message' => 'aucune donnée renvoyée', "bg-color" => "bg-danger"], 200);
                 $response = ['success' => false, 'message' => 'aucune donnée renvoyéé', 'bg-color' => 'bg-danger', 'statut' => 200];
-                $this->render('formcreate', ['response' => $response]);
+                $this->render('formcreate', ['response' => $response]); */
             }
             $articleModel->create($titre, $contenu, $fichier);
         } else {
-            $logger = new Logger("create_article");
-            $logger->pushHandler(new StreamHandler(__DIR__ . '/my_app.log', Logger::DEBUG));
-            $logger->pushHandler(new FirePHPHandler());
-            $logger->info('Tout va bien');
-            $logger->error('Je ne peux pas trouver la voiture');
-            $logger->critical(' Ça ne marche pas !');
+            $logger->error('Aucune données envoyées');
             /* $jsonResponse = new JsonResponse(['success' => false, 'message' => 'aucune donnée renvoyée', "bg-color" => "bg-danger"], 200);
             $response = ['success' => false, 'message' => 'aucune donnée renvoyéé', 'bg-color' => 'bg-danger', 'statut' => 200];
             $this->render('formcreate', ['response' => $response]); */
@@ -92,6 +89,10 @@ class ArticleController extends Controller
 
     public function formUpdate(Request $request)
     {
+        $logger = new Logger("update_article");
+        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new FirePHPHandler());
+
         $articleModel = new ArticleModel();
         $id = $request->get('id');
         $article = $articleModel->getArticleById($id);
@@ -101,20 +102,32 @@ class ArticleController extends Controller
             $titre = $request->request->get('titre');
             $contenu = $request->request->get('contenu');
             $articleModel->update($id, $titre, $contenu, '/upload' . '/' . $_FILES['img']['name']);
+            $logger->info('Modification effectuée');
             $article = $articleModel->getArticleById($id);
         } else {
-            $jsonResponse = new JsonResponse(['success' => false, 'message' => 'aucune donnée renvoyée', "bg-color" => "bg-danger"], 200);
+            $logger->error('Echec de la moficiation');
+            /* $jsonResponse = new JsonResponse(['success' => false, 'message' => 'aucune donnée renvoyée', "bg-color" => "bg-danger"], 200);
             $response = ['success' => false, 'message' => 'aucune donnée renvoyéé', 'bg-color' => 'bg-danger', 'statut' => 200];
-            $this->render('formUpdate', ['response' => $response]);
+            $this->render('formUpdate', ['response' => $response]); */
         }
         $this->render('formUpdate', ['article' => $article]);
     }
 
     public function delete(Request $request)
     {
+        $logger = new Logger("delete_article");
+        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new FirePHPHandler());
+
         $id = $request->request->get('id');
         $articleModel = new ArticleModel();
-        $articleModel->delete($id);
+
+        if (isset($id)) {
+            $articleModel->delete($id);
+            $logger->info('Supression réussie');
+        } else {
+            $logger->error('Erreur lors de la suppression');
+        }
         (new RedirectResponse("index.php"))->send();
     }
 }
