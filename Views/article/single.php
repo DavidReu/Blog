@@ -16,7 +16,7 @@ $session = new Session(); ?>
                 ?>
             </p>
         </div>
-        <?php if ($session->get('user') == true || $session->get('admin') == true) {
+        <?php if ($session->get('user') == true || $session->get('admin') == true || $session->get('editor') == true) {
             include('commentaires/commentCreate.php');
         } else { ?>
             <div class="col-md-5 align-self-center text-center">

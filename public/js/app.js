@@ -46,7 +46,7 @@ setTimeout(function(){
         rowUser.remove();
     })
   });
-},2000);
+},3000);
 //-----------------------------------------------------
 
 
@@ -64,4 +64,4 @@ setTimeout(function(){
           rowComment.remove();
       })
     });
-},2000);
+},3000);

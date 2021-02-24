@@ -1,8 +1,8 @@
-<?php 
-if(isset($response)){
-    echo '<div class="card '.$response['bg-color'].'">
+<?php
+if (isset($response)) {
+    echo '<div class="card ' . $response['bg-color'] . '">
     <div class="card-body">
-      '.$response['message'].'
+      ' . $response['message'] . '
     </div>
   </div>';
 }

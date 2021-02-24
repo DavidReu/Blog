@@ -38,9 +38,10 @@ $uri = $request->getPathInfo();
 //---------- SESSION ----------
 $session = new Session();
 $session->get('admin', false);
+$session->get('editor', false);
 $session->get('user', false);
 $session->get('userId', null);
-if ($session->get('admin') == true || $session->get('user') == true) {
+if ($session->get('admin') == true || $session->get('user') == true || $session->get('editor') == true) {
     foreach ($session->getFlashBag()->get('notice', []) as $message) {
         include('Views/auth/messagelog.php');
     }
@@ -50,7 +51,6 @@ if ($session->get('admin') == true || $session->get('user') == true) {
     }
 }
 //-----------------------------
-
 
 
 
@@ -70,6 +70,7 @@ $method1 = $tab[1];
 
 $map = [
     '/login' => ['controller' => UserController::class, 'method' => 'login'],
+    '/connexion' => ['controller' => UserController::class, 'method' => 'login'],
     '/deconnexion' => ['controller' => UserController::class, 'method' => 'logout'],
     '/delete' => ['controller' => ArticleController::class, 'method' => 'delete'],
     '/' => ['controller' => ArticleController::class, 'method' => 'home'],
@@ -86,7 +87,8 @@ $map = [
     '/userUpdate' => ['controller' => UserController::class, 'method' => 'updateUser'],
     '/profil' => ['controller' => UserController::class, 'method' => 'getUserProfil'],
     '/profil/modifier' => ['controller' => UserController::class, 'method' => 'updateProfil'],
-    '/updateComment' => ['controller' => CommentaireController::class, 'method' => 'updateComment']
+    '/updateComment' => ['controller' => CommentaireController::class, 'method' => 'updateComment'],
+    '/registerEditor' => ['controller' => UserController::class, 'method' => 'registerEditor']
 ];
 
 

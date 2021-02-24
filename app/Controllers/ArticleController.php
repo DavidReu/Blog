@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\FirePHPHandler;
-
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class ArticleController extends Controller
 {
@@ -55,6 +55,7 @@ class ArticleController extends Controller
         $uri = $request->getPathInfo();
         $poster = $request->get('poster');
         $longeur = strlen($request->request->get('titre'));
+        $session = new Session();
 
         $logger = new Logger("create_article");
         $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
@@ -67,6 +68,7 @@ class ArticleController extends Controller
             $contenu = $this->valid($contenu);
             $img = $_FILES['img']['name'];
             $dossier = 'upload/';
+            $userId = $session->get('userId');
             $logger->info('Tout va bien');
             if (!empty($_FILES["img"]["tmp_name"])) {
                 move_uploaded_file($_FILES["img"]["tmp_name"], $dossier . $img);
@@ -77,7 +79,7 @@ class ArticleController extends Controller
                 $response = ['success' => false, 'message' => 'aucune donnée renvoyéé', 'bg-color' => 'bg-danger', 'statut' => 200];
                 $this->render('formcreate', ['response' => $response]); */
             }
-            $articleModel->create($titre, $contenu, $fichier);
+            $articleModel->create($titre, $contenu, $fichier, $userId);
         } else {
             $logger->error('Aucune données envoyées');
             /* $jsonResponse = new JsonResponse(['success' => false, 'message' => 'aucune donnée renvoyée', "bg-color" => "bg-danger"], 200);
@@ -101,7 +103,15 @@ class ArticleController extends Controller
         if (isset($modifier)) {
             $titre = $request->request->get('titre');
             $contenu = $request->request->get('contenu');
-            $articleModel->update($id, $titre, $contenu, '/upload' . '/' . $_FILES['img']['name']);
+            $titre = $this->valid($titre);
+            $contenu = $this->valid($contenu);
+            if (!empty($_FILES["img"]["tmp_name"])) {
+                $img = $_FILES['img']['name'];
+                $dossier = 'upload/';
+                move_uploaded_file($_FILES["img"]["tmp_name"], $dossier . $img);
+                $fichier = '/upload' . '/' . $img;
+            }
+            $articleModel->update($id, $titre, $contenu, $fichier);
             $logger->info('Modification effectuée');
             $article = $articleModel->getArticleById($id);
         } else {
