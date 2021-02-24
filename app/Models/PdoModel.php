@@ -9,7 +9,7 @@ class PdoModel
     private $user;
     private $pass;
 
-    public function __construct($dbName = 'db', $serverName = 'db', $userName = 'db', $password = 'db')
+    public function __construct($dbName = 'heroku_655c229d9b930c1', $serverName = 'eu-cdbr-west-03.cleardb.net', $userName = 'b47d2e19f5ea9e', $password = 'eb5debf1')
     {
         $this->dbName = $dbName;
         $this->server = $serverName;
