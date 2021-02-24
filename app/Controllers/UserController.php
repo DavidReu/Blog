@@ -26,7 +26,7 @@ class UserController extends Controller
         $userModel = new UserModel();
         $user = $userModel->log($mail);
 
-        if (isset($connexion)) {
+        if (isset($connexion) && filter_var($mail, FILTER_VALIDATE_EMAIL)) {
             if ($mail == $user->mail && password_verify($mdp, $user->mdp) == true) {
                 $userId = $user->id;
                 $session = new Session();
@@ -72,15 +72,22 @@ class UserController extends Controller
             $mdp = $request->request->get('mdp');
             $nom = $request->request->get('nom');
             $prenom = $request->request->get('prenom');
-            if (!empty($mail) && !empty($mdp)) {
-                $mail = $this->valid($mail);
-                $mdp = $this->valid($mdp);
-                $nom = $this->valid($nom);
-                $prenom = $this->valid($prenom);
-                $mdp = password_hash($mdp, PASSWORD_BCRYPT);
-                $role = $request->request->get('role');
-                $userModel->registerEditor($mail, $mdp, $nom, $prenom, $role);
-                $logger->info('Utilisateur bien enregistré');
+
+            if (!empty($mail) && !empty($mdp) && !empty($nom) && !empty($prenom) && filter_var($mail, FILTER_VALIDATE_EMAIL) && preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $mdp)) {
+                $user = $userModel->checkMail($mail);
+                if (!$user->id) {
+                    $mail = $this->valid($mail);
+                    $mdp = $this->valid($mdp);
+                    $nom = $this->valid($nom);
+                    $prenom = $this->valid($prenom);
+                    $mdp = password_hash($mdp, PASSWORD_BCRYPT);
+                    $role = $request->request->get('role');
+                    $userModel->registerEditor($mail, $mdp, $nom, $prenom, $role);
+                    $logger->info('Utilisateur bien enregistré');
+                } else {
+                    echo "<script type='text/javascript'>
+                    alert('Cet email est déjà utilisé')</script>";
+                }
             } else {
                 $logger->error('Erreur lors de l\'enregistrement de l\'utilisateur');
             }
@@ -144,6 +151,9 @@ class UserController extends Controller
             $nom = $request->request->get('nom');
             $prenom = $request->request->get('prenom');
             $mail = $request->request->get('mail');
+            $nom = $this->valid($nom);
+            $prenom = $this->valid($prenom);
+            $mail = $this->valid($mail);
             $userModel->updateUser($id, $nom, $prenom, $mail);
             $user = $userModel->getUser($id);
             $logger->info('Modification réussie');
@@ -183,6 +193,10 @@ class UserController extends Controller
             $prenom = $request->request->get('prenom');
             $mail = $request->request->get('mail');
             $mdp = $request->request->get('pwd');
+            $nom = $this->valid($nom);
+            $prenom = $this->valid($prenom);
+            $mail = $this->valid($mail);
+            $mdp = password_hash($mdp, PASSWORD_BCRYPT);
             $userModel->updateUser($id, $nom, $prenom, $mail, $mdp);
             $user = $userModel->getUser($id);
             $logger->info('Profil bien modifié');
@@ -207,15 +221,21 @@ class UserController extends Controller
             $mdp = $request->request->get('mdp');
             $nom = $request->request->get('nom');
             $prenom = $request->request->get('prenom');
-            if (!empty($mail) && !empty($mdp)) {
-                $mail = $this->valid($mail);
-                $mdp = $this->valid($mdp);
-                $nom = $this->valid($nom);
-                $prenom = $this->valid($prenom);
-                $mdp = password_hash($mdp, PASSWORD_BCRYPT);
-                $role = $request->request->get('role');
-                $userModel->registerEditor($mail, $mdp, $nom, $prenom, $role);
-                $logger->info('Utilisateur bien enregistré');
+            if (!empty($mail) && !empty($mdp) && !empty($nom) && !empty($prenom) && filter_var($mail, FILTER_VALIDATE_EMAIL) && preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $mdp)) {
+                $user = $userModel->checkMail($mail);
+                if (!$user->id) {
+                    $mail = $this->valid($mail);
+                    $mdp = $this->valid($mdp);
+                    $nom = $this->valid($nom);
+                    $prenom = $this->valid($prenom);
+                    $mdp = password_hash($mdp, PASSWORD_BCRYPT);
+                    $role = $request->request->get('role');
+                    $userModel->registerEditor($mail, $mdp, $nom, $prenom, $role);
+                    $logger->info('Utilisateur bien enregistré');
+                } else {
+                    echo "<script type='text/javascript'>
+                    alert('Cet email est déjà utilisé')</script>";
+                }
             } else {
                 $logger->error('Erreur lors de l\'enregistrement de l\'utilisateur');
             }

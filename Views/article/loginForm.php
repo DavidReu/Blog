@@ -8,8 +8,8 @@
                 <div class="main">
                     <p class="sign" align="center">Connectez vous</p>
                     <form class="form1">
-                        <input class="un " type="text" align="center" placeholder="Votre mail" name="email">
-                        <input class="pass" type="password" align="center" placeholder="Mot de passe" name="mdp">
+                        <input class="un " type="text" align="center" placeholder="Votre mail" name="email" required>
+                        <input class="pass" type="password" align="center" placeholder="Mot de passe" name="mdp" required>
                         <button class="submit" align="center" name="connexion">Connexion</button>
 
                         <!--  <input type="text" name="email" placeholder="Email">

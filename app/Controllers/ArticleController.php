@@ -103,7 +103,15 @@ class ArticleController extends Controller
         if (isset($modifier)) {
             $titre = $request->request->get('titre');
             $contenu = $request->request->get('contenu');
-            $articleModel->update($id, $titre, $contenu, '/upload' . '/' . $_FILES['img']['name']);
+            $titre = $this->valid($titre);
+            $contenu = $this->valid($contenu);
+            if (!empty($_FILES["img"]["tmp_name"])) {
+                $img = $_FILES['img']['name'];
+                $dossier = 'upload/';
+                move_uploaded_file($_FILES["img"]["tmp_name"], $dossier . $img);
+                $fichier = '/upload' . '/' . $img;
+            }
+            $articleModel->update($id, $titre, $contenu, $fichier);
             $logger->info('Modification effectuée');
             $article = $articleModel->getArticleById($id);
         } else {

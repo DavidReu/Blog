@@ -30,8 +30,8 @@ class CommentaireController extends Controller
         $articleId = intval($articleId);
         $commentaireModel = new CommentaireModel();
         $poster = $request->request->get('poster');
-        if (isset($poster)) {
-            $content = $request->request->get('content');
+        $content = $request->request->get('content');
+        if (isset($poster) && !empty($content)) {
             $content = $this->valid($content);
             $logger->info('Commentaire bien créé');
             $commentaireModel->create($content, $articleId, $userId);
@@ -83,10 +83,11 @@ class CommentaireController extends Controller
 
         $commentModel = new CommentaireModel();
         $edit = $request->request->get('editComment');
-        if (isset($edit)) {
+        $content = $request->request->get('newContent');
+        if (isset($edit) && !empty($content)) {
             $id = $request->request->get('commentId');
             $articleId = $request->request->get("articleId");
-            $content = $request->request->get('newContent');
+            $content = $this->valid($content);
             $logger->info('Commentaire bien modifié');
             $editComment = $commentModel->updateComment($id, $content);
         } else {

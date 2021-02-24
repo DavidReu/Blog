@@ -26,8 +26,8 @@
 
 .form-input {
   position: relative;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .form-input i {
@@ -58,8 +58,9 @@
 }
 
 .signup {
-  height: 50px;
+  height: 40px;
   font-size: 14px;
+  margin-top: 15px;
 }
 /* -------------------------------- */
 

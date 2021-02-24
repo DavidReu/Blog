@@ -51,7 +51,6 @@ if ($session->get('admin') == true || $session->get('user') == true || $session-
     }
 }
 //-----------------------------
-$uri = $_SERVER['REQUEST_URI'];
 
 
 

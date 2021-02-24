@@ -79,6 +79,13 @@ class UserModel extends Model
         return $user;
     }
 
+    public function checkMail($mail)
+    {
+        $requete = $this->pdo->query("SELECT * FROM users WHERE mail = '$mail'");
+        $user = $requete->fetch(\PDO::FETCH_OBJ);
+        return $user;
+    }
+
     public function getProfil($id)
     {
         $query = $this->pdo->query("SELECT u.id, u.mail, u.nom, u.prenom, a.titre, a.user_id, c.content FROM users AS u INNER JOIN articles AS a ON u.id = a.user_id INNER JOIN commentaires  AS c ON u.id = c.usersId WHERE u.id=$id");

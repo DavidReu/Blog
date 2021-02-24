@@ -31,7 +31,7 @@ class Controller
     {
         $donnees = trim($donnees);
         $donnees = stripslashes($donnees);
-        $donnees = htmlspecialchars($donnees);
+        $donnees = htmlentities($donnees);
         return $donnees;
     }
 }
