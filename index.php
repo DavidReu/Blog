@@ -51,7 +51,7 @@ if ($session->get('admin') == true || $session->get('user') == true || $session-
     }
 }
 //-----------------------------
-
+$uri = $_SERVER['REQUEST_URI'];
 
 
 
@@ -71,6 +71,7 @@ $method1 = $tab[1];
 
 $map = [
     '/login' => ['controller' => UserController::class, 'method' => 'login'],
+    '/connexion' => ['controller' => UserController::class, 'method' => 'login'],
     '/deconnexion' => ['controller' => UserController::class, 'method' => 'logout'],
     '/delete' => ['controller' => ArticleController::class, 'method' => 'delete'],
     '/' => ['controller' => ArticleController::class, 'method' => 'home'],

@@ -20,29 +20,33 @@ class UserController extends Controller
     {
         $mail = $request->request->get('email');
         $mdp = $request->request->get('mdp');
+        $connexion = $request->request->get('connexion');
         $mail = $this->valid($mail);
         $mdp = $this->valid($mdp);
         $userModel = new UserModel();
         $user = $userModel->log($mail);
-        $userId = $user->id;
 
-        if ($mail == $user->mail && password_verify($mdp, $user->mdp) == true) {
-            $session = new Session();
-            if ($user->role == "admin") {
-                $session->set('admin', 'true');
-            } elseif ($user->role == "editor") {
-                $session->set('editor', 'true');
+        if (isset($connexion)) {
+            if ($mail == $user->mail && password_verify($mdp, $user->mdp) == true) {
+                $userId = $user->id;
+                $session = new Session();
+                if ($user->role == "admin") {
+                    $session->set('admin', 'true');
+                } elseif ($user->role == "editor") {
+                    $session->set('editor', 'true');
+                } else {
+                    $session->set('user', 'true');
+                }
+                $session->set('userId', $userId);
+                $session->getFlashBag()->add('notice', 'Vous êtes connecté');
+                (new RedirectResponse("/"))->send();
             } else {
-                $session->set('user', 'true');
+                $session = new Session();
+                $session->getFlashBag()->add('erreur', 'Erreur de connexion');
+                (new RedirectResponse("/"))->send();
             }
-            $session->set('userId', $userId);
-            $session->getFlashBag()->add('notice', 'Vous êtes connecté');
-            (new RedirectResponse("/"))->send();
-        } else {
-            $session = new Session();
-            $session->getFlashBag()->add('erreur', 'Erreur de connexion');
-            (new RedirectResponse("/"))->send();
         }
+        $this->render('loginForm', ['user' => '']);
     }
 
     public function logout()
@@ -51,7 +55,7 @@ class UserController extends Controller
         $session->set('admin', 'false');
         $session->set('user', 'false');
         $session->clear();
-        (new RedirectResponse("index.php"))->send();
+        (new RedirectResponse("/"))->send();
     }
 
     public function register(Request $request)

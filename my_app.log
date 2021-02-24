@@ -142,3 +142,8 @@
 [2021-02-23T18:06:46.975127+00:00] show_article.INFO: Les données de l'article ont bien été récupérées [] []
 [2021-02-23T18:21:35.273394+00:00] show_article.INFO: Les données de l'article ont bien été récupérées [] []
 [2021-02-23T18:21:38.764325+00:00] create_comment.INFO: Commentaire bien créé [] []
+[2021-02-24T05:03:11.500593+00:00] show_article.INFO: Les données de l'article ont bien été récupérées [] []
+[2021-02-24T05:09:03.877534+00:00] show_article.INFO: Les données de l'article ont bien été récupérées [] []
+[2021-02-24T05:54:44.920679+00:00] create_user.INFO: Utilisateur bien enregistré [] []
+[2021-02-24T05:56:04.302743+00:00] create_user.INFO: Utilisateur bien enregistré [] []
+[2021-02-24T06:06:37.050267+00:00] show_article.INFO: Les données de l'article ont bien été récupérées [] []

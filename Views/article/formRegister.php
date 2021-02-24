@@ -1,19 +1,20 @@
-<div class="container-fluid">
-    <h5 class="text-center">Inscrivez vous</h5>
-    <p class="text-center">Être inscrit vous permet de commenter les différents articles présents sur le blog</p>
-    <div class="container">
-        <div class="row">
-            <form action="" method="POST" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
-                <input class="col-4 my-2" type="text" name="nom" placeholder="Votre nom">
-                <input class="col-4 my-2" type="text" name="prenom" placeholder="Votre prénom">
-                <input class="col-4 my-2" type="text" name="mail" placeholder="Votre mail">
-                <input id="password" class="col-4 my-2" type="password" name="mdp" placeholder="Entrez un mot de passe" onkeyup='check()'></input>
-                <input id="confirmpwd" class="col-4 my-2" type="password" name="confirmpwd" placeholder="Confirmez le mot de passe" onkeyup='check()'></input>
-                <span id='message'></span>
+<div class="container mt-5 mb-5">
+    <div class="row d-flex align-items-center justify-content-center">
+        <form class="col-md-6" method="POST">
+            <div class="formRegister px-5 py-5">
+                <h5 class="mt-3">Inscrivez-vous</h5> <small class="mt-2 text-muted">Cela vous donne la possibilité de laisser des commentaires sur les articles</small>
+                <div class="form-input"> <i class="fa fa-envelope"></i> <input type="text" class="form-control" placeholder="Votre mail" name="mail"> </div>
+                <div class="form-input"> <i class="fa fa-user"></i> <input type="text" class="form-control" placeholder="Votre nom" name="nom"> </div>
+                <div class="form-input"> <i class="fa fa-user"></i> <input type="text" class="form-control" placeholder="Votre prenom" name="prenom"> </div>
+                <div class="form-input"> <i class="fa fa-lock"></i> <input type="password" class="form-control" placeholder="Mot de passe" name="mdp" id="password" onkeyup='check()'> </div>
+                <div class="form-input"> <i class="fa fa-lock"></i> <input type="password" class="form-control" placeholder="Mot de passe" name="confirmpwd" id="confirmpwd" onkeyup='check()'> </div>
+                <div class="row text-center">
+                    <span id='message'></span>
+                </div>
                 <input type="hidden" name="role" value="user">
-                <input type="submit" class="btn btn-info col-1" value="S'inscrire" name="regist">
-            </form>
-        </div>
+                <input type="submit" class="btn btn-info col-3 signup" value="S'inscrire" name="regist">
+            </div>
+        </form>
     </div>
 </div>
 <script type="text/javascript" src="/public/js/app.js"></script>
