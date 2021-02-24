@@ -7,6 +7,21 @@ error_reporting(E_ALL);
 require_once('vendor/autoload.php');
 //-----------------------------
 
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\FirePHPHandler;
+
+// Create the logger
+$logger = new Logger('my_logger');
+// Now add some handlers
+$logger->pushHandler(new StreamHandler(__DIR__ . '/my_app.log', Logger::DEBUG));
+$logger->pushHandler(new FirePHPHandler());
+
+// You can now use your logger
+/* $logger->info('My logger is now ready');
+dd($logger); */
+
+
 //---------- Use ----------
 use App\Controllers\ArticleController;
 use App\Controllers\CommentaireController;
@@ -23,9 +38,10 @@ $uri = $request->getPathInfo();
 //---------- SESSION ----------
 $session = new Session();
 $session->get('admin', false);
+$session->get('editor', false);
 $session->get('user', false);
 $session->get('userId', null);
-if ($session->get('admin') == true || $session->get('user') == true) {
+if ($session->get('admin') == true || $session->get('user') == true || $session->get('editor') == true) {
     foreach ($session->getFlashBag()->get('notice', []) as $message) {
         include('Views/auth/messagelog.php');
     }
@@ -35,7 +51,6 @@ if ($session->get('admin') == true || $session->get('user') == true) {
     }
 }
 //-----------------------------
-
 
 
 
@@ -55,11 +70,13 @@ $method1 = $tab[1];
 
 $map = [
     '/login' => ['controller' => UserController::class, 'method' => 'login'],
+    '/connexion' => ['controller' => UserController::class, 'method' => 'login'],
     '/deconnexion' => ['controller' => UserController::class, 'method' => 'logout'],
     '/delete' => ['controller' => ArticleController::class, 'method' => 'delete'],
     '/' => ['controller' => ArticleController::class, 'method' => 'home'],
     '/article' => ['controller' => ArticleController::class, 'method' => 'showArticle'],
     '/article/new' => ['controller' =>  ArticleController::class, 'method' => 'createForm'],
+    '/showForm'  => ['controller' =>  ArticleController::class, 'method' => 'showForm'],
     '/article/update' => ['controller' => ArticleController::class, 'method' => 'formUpdate'],
     '/inscription' => ['controller' => UserController::class, 'method' => 'register'],
     '/commentaire' => ['controller' => CommentaireController::class, 'method' => 'createCom'],
@@ -70,7 +87,8 @@ $map = [
     '/userUpdate' => ['controller' => UserController::class, 'method' => 'updateUser'],
     '/profil' => ['controller' => UserController::class, 'method' => 'getUserProfil'],
     '/profil/modifier' => ['controller' => UserController::class, 'method' => 'updateProfil'],
-    '/updateComment' => ['controller' => CommentaireController::class, 'method' => 'updateComment']
+    '/updateComment' => ['controller' => CommentaireController::class, 'method' => 'updateComment'],
+    '/registerEditor' => ['controller' => UserController::class, 'method' => 'registerEditor']
 ];
 
 

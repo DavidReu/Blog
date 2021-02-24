@@ -1,3 +1,141 @@
 #successMessage {
   position: relative;
 }
+
+.card {
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ---------- Form Register ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+.formRegister {
+  border: none;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #1c1e21;
+  color: rgba(44, 150, 199, 0.74);
+}
+
+.form-input {
+  position: relative;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.form-input i {
+  position: absolute;
+  font-size: 18px;
+  top: 15px;
+  left: 10px;
+}
+
+.form-control {
+  height: 50px;
+  background-color: #1c1e21;
+  text-indent: 24px;
+  font-size: 15px;
+  color: #fff;
+}
+
+.form-control:focus {
+  background-color: #25272a;
+  box-shadow: none;
+  color: #fff;
+  border-color: #4f63e7;
+}
+
+.form-check-label {
+  margin-top: 2px;
+  font-size: 14px;
+}
+
+.signup {
+  height: 40px;
+  font-size: 14px;
+  margin-top: 15px;
+}
+/* -------------------------------- */
+
+/* ---------- Login Form ---------- */
+
+.sign {
+  padding-top: 40px;
+  color: #8c55aa;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+  font-size: 23px;
+}
+
+.un {
+  width: 76%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 50px;
+  margin-left: 46px;
+  text-align: center;
+  margin-bottom: 27px;
+  font-family: "Ubuntu", sans-serif;
+}
+
+form.form1 {
+  padding-top: 40px;
+}
+
+.pass {
+  width: 76%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 50px;
+  margin-left: 46px;
+  text-align: center;
+  margin-bottom: 27px;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.un:focus,
+.pass:focus {
+  border: 2px solid rgba(0, 0, 0, 0.18) !important;
+}
+
+.submit {
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, #9c27b0, #e040fb);
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: "Ubuntu", sans-serif;
+  margin-left: 35%;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+/* ------------------------------- */

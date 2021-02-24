@@ -7,7 +7,7 @@ use App\Models\Model;
 class ArticleModel extends Model
 {
 
-    public function create($titre, $contenu, $img)
+    public function create($titre, $contenu, $img, $userID)
     {
 
         try {
@@ -15,7 +15,7 @@ class ArticleModel extends Model
             $requete->execute(array(
                 'titre' => $titre,
                 'contenu' => $contenu,
-                'userId' => "1",
+                'userId' => $userID,
                 'img' => $img
             ));
             echo "Votre artcicle a bien été ajouté !";
@@ -51,6 +51,13 @@ class ArticleModel extends Model
     public function getAllArticle()
     {
         $query = $this->pdo->query("SELECT * FROM articles");
+        $articles = $query->fetchAll(\PDO::FETCH_ASSOC);
+        return $articles;
+    }
+
+    public function showAriclesByUser($userId)
+    {
+        $query = $this->pdo->query("SELECT titre, id FROM articles WHERE user_id=$userId");
         $articles = $query->fetchAll(\PDO::FETCH_ASSOC);
         return $articles;
     }
