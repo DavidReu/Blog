@@ -6,16 +6,14 @@
         <div class="offset-1 col-md-4 d-flex justify-content-center align-self-center">
             <form action="login" method="POST">
                 <div class="main">
-                    <p class="sign" align="center">Connectez vous</p>
+                    <p class="sign center">Connectez vous</p>
                     <form class="form1">
-                        <input class="un " type="text" align="center" placeholder="Votre mail" name="email" required>
-                        <input class="pass" type="password" align="center" placeholder="Mot de passe" name="mdp" required>
-                        <button class="submit" align="center" name="connexion">Connexion</button>
-
-                        <!--  <input type="text" name="email" placeholder="Email">
-                        <input type="password" name="mdp" placeholder="Mot de passe">
-                        <button class="btn btn-info" type="submit" name="connexion">Connexion</button> -->
+                        <input class="un center" type="text" placeholder="Votre mail" name="email" required>
+                        <input class="pass center" type="password" placeholder="Mot de passe" name="mdp" required>
+                        <button class="submit center" name="connexion">Connexion</button>
                     </form>
                 </div>
+            </form>
         </div>
     </div>
+</div>
