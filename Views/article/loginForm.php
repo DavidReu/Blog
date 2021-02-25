@@ -7,11 +7,11 @@
             <form action="login" method="POST">
                 <div class="main">
                     <p class="sign center">Connectez vous</p>
-                    <form class="form1">
+                    <div class="form1">
                         <input class="un center" type="text" placeholder="Votre mail" name="email" required>
                         <input class="pass center" type="password" placeholder="Mot de passe" name="mdp" required>
                         <button class="submit center" name="connexion">Connexion</button>
-                    </form>
+                    </div>
                 </div>
             </form>
         </div>
