@@ -1,6 +1,6 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+/* ini_set('display_errors', 1);
+error_reporting(E_ALL); */
 //define("ROOT", '/');
 
 //---------- Require ----------
@@ -57,15 +57,6 @@ if ($session->get('admin') == true || $session->get('user') == true || $session-
 $articleController = new ArticleController();
 $userController = new UserController();
 
-
-/* --------- Autre router possible -----------
-$string = 'App\Controllers\ArticleController@home';
-//dd(explode('@', $string));
-$tab = explode('@', $string);
-//dd($tab);
-$controller1 = new $tab[0]();
-$method1 = $tab[1];
-------------------------------------------- */
 
 
 $map = [

@@ -182,3 +182,6 @@
 [2021-02-24T11:17:31.647815+00:00] delete_user.ERROR: Echec de la suppression [] []
 [2021-02-24T11:39:39.932596+00:00] create_user.ERROR: Erreur lors de l'enregistrement de l'utilisateur [] []
 [2021-02-24T14:55:48.816907+00:00] create_user.INFO: Utilisateur bien enregistré [] []
+[2021-02-25T05:57:09.596437+00:00] show_article.INFO: Les données de l'article ont bien été récupérées [] []
+[2021-02-25T05:57:23.554148+00:00] show_article.INFO: Les données de l'article ont bien été récupérées [] []
+[2021-02-25T05:57:34.459917+00:00] show_article.INFO: Les données de l'article ont bien été récupérées [] []
