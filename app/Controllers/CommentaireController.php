@@ -20,7 +20,7 @@ class CommentaireController extends Controller
     public function createCom(Request $request)
     {
         $logger = new Logger("create_comment");
-        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
 
         $session = new Session();
@@ -78,7 +78,7 @@ class CommentaireController extends Controller
     public function updateComment(Request $request)
     {
         $logger = new Logger("update_comment");
-        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
 
         $commentModel = new CommentaireModel();

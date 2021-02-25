@@ -64,7 +64,7 @@ class UserController extends Controller
         $regist = $request->request->get('regist');
 
         $logger = new Logger("create_user");
-        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
 
         if (isset($regist)) {
@@ -102,7 +102,7 @@ class UserController extends Controller
         $this->render('listUsers', ['users' => $users]);
 
         $logger = new Logger("delete_user");
-        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
 
         if ($request->getMethod() == "DELETE") {
@@ -144,7 +144,7 @@ class UserController extends Controller
         $modifier = $request->get('modifier');
 
         $logger = new Logger("update_user");
-        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
 
         if (isset($modifier)) {
@@ -185,7 +185,7 @@ class UserController extends Controller
         $modifier = $request->get('modifier');
 
         $logger = new Logger("update_profil");
-        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
 
         if (isset($modifier)) {
@@ -212,7 +212,7 @@ class UserController extends Controller
         $regist = $request->request->get('registEditor');
 
         $logger = new Logger("create_editor");
-        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
         $this->render('formRegisterEditor', ['user' => '']);
 

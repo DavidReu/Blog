@@ -27,7 +27,7 @@ class ArticleController extends Controller
     public function showarticle(Request $request)
     {
         $logger = new Logger("show_article");
-        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
 
         $id = $request->get('id');
@@ -58,7 +58,7 @@ class ArticleController extends Controller
         $session = new Session();
 
         $logger = new Logger("create_article");
-        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
 
         if ($longeur > 0) {
@@ -92,7 +92,7 @@ class ArticleController extends Controller
     public function formUpdate(Request $request)
     {
         $logger = new Logger("update_article");
-        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
 
         $articleModel = new ArticleModel();
@@ -126,7 +126,7 @@ class ArticleController extends Controller
     public function delete(Request $request)
     {
         $logger = new Logger("delete_article");
-        $logger->pushHandler(new StreamHandler('/var/www/html/my_app.log', Logger::DEBUG));
+        $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
 
         $id = $request->request->get('id');
