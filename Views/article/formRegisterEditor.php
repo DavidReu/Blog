@@ -1,11 +1,9 @@
-<?php $pattern = '(?:[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])' ?>
-
 <div class="container mt-5 mb-5">
     <div class="row d-flex align-items-center justify-content-center">
         <form class="col-md-6" method="POST">
             <div class="formRegister px-5 py-5">
                 <h5 class="mt-3">Inscrivez un rédacteur</h5> <small class="mt-2 text-muted">Un rédacteur aura la possibilité d'écrire un article sur le blog ou de laisser un commentaire</small>
-                <div class="form-input"> <i class="fa fa-envelope"></i> <input type="mail" class="form-control" placeholder="Votre mail" name="mail" required pattern="<?php echo $pattern ?>"> </div>
+                <div class="form-input"> <i class="fa fa-envelope"></i> <input type="mail" class="form-control" placeholder="Votre mail" name="mail" required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"> </div>
                 <div class="form-input"> <i class="fa fa-user"></i> <input type="text" class="form-control" placeholder="Votre nom" name="nom" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"> </div>
                 <div class="form-input"> <i class="fa fa-user"></i> <input type="text" class="form-control" placeholder="Votre prenom" name="prenom" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"> </div>
                 <div class="form-input"> <i class="fa fa-lock"></i> <input type="password" class="form-control" placeholder="Mot de passe" name="mdp" id="password" onkeyup='check()' required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"> </div>

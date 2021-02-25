@@ -95,19 +95,23 @@ class UserController extends Controller
         $this->render('formRegister', ['user' => '']);
     }
 
-    public function showUsers(Request $request)
+    public function showUsers()
     {
         $userModel = new UserModel();
         $users = $userModel->getUsers();
         $this->render('listUsers', ['users' => $users]);
+    }
 
+    public function deleteUser(Request $request)
+    {
         $logger = new Logger("delete_user");
         $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
 
-        if ($request->getMethod() == "DELETE") {
+        $id = $request->query->get('id');
+
+        if (isset($id)) {
             $userModel = new UserModel();
-            $id = $request->query->get('id');
             $delete = $userModel->deleteUser($id);
             $logger->info('Suppression réussie');
             $jsonResponse = new JsonResponse(['success' => 'Tout c\'est bien passé'], 200);

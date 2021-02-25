@@ -28,8 +28,7 @@ const check = function() {
 //------------------ A améliorer -----------------
 // fonction supprimer utilisant AJAX 
 // setimeout obligatoire pour le moment pour attendre le chargement de la page
-setTimeout(function(){
-  const deleteButtons = document.querySelectorAll(".deleteUser")
+const deleteButtons = document.querySelectorAll(".deleteUser")
   //console.log(deleteButtons);
   deleteButtons.forEach(button => {
     button.addEventListener('click', async function(event){
@@ -46,7 +45,9 @@ setTimeout(function(){
         rowUser.remove();
     })
   });
-},3000);
+/* setTimeout(function(){
+  
+},2000); */
 //-----------------------------------------------------
 
 

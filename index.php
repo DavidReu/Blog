@@ -20,7 +20,7 @@ $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
 $logger->pushHandler(new FirePHPHandler());
 
 // You can now use your logger
-$logger->info('My logger is now ready');
+//$logger->info('My logger is now ready');
 
 
 //---------- Use ----------
@@ -90,7 +90,8 @@ $map = [
     '/profil' => ['controller' => UserController::class, 'method' => 'getUserProfil'],
     '/profil/modifier' => ['controller' => UserController::class, 'method' => 'updateProfil'],
     '/updateComment' => ['controller' => CommentaireController::class, 'method' => 'updateComment'],
-    '/registerEditor' => ['controller' => UserController::class, 'method' => 'registerEditor']
+    '/registerEditor' => ['controller' => UserController::class, 'method' => 'registerEditor'],
+    '/deleteUser' => ['controller' => UserController::class, 'method' => 'deleteUser']
 ];
 
 

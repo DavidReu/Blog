@@ -1,6 +1,6 @@
 <div class="container-fluid mb-5 mt-1">
     <div class="row">
-        <form action="" method="POST" class="d-flex flex-column align-items-center w-100" enctype="multipart/form-data">
+        <form method="POST" class="d-flex flex-column align-items-center w-100" enctype="multipart/form-data">
             <h4>Vous pouvez modifier votre article ici</h4>
             <input style="height: 50px;" class="col-5 my-2" type="text" name="titre" value="<?php echo $article->titre;
                                                                                             ?>">
