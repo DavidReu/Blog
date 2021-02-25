@@ -15,6 +15,7 @@ class Controller
         // Crée le chemin et inclut le fichier de vue
         ob_start();
         include('Views/article/' . $path . '.php');
+        include('Views/article/footer.php');
         //$response->setContent(json_encode(["data" => "bouh"]));
         /**
          * Tout ce qui se trouve après ob_start sera enregistrer dans la variable $content grâce à ob_get_clean 
