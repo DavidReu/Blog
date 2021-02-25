@@ -10,6 +10,7 @@ $uri = $_SERVER['REQUEST_URI'];
 <!-- Template utilisé pour toutes les pages -->
 
 <head>
+    <title>Le blog chill</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="/public/css/style.css">
     <!-- AniCollection.css library -->
@@ -41,7 +42,6 @@ $uri = $_SERVER['REQUEST_URI'];
                         <?php else : ?>
                             <a href="/deconnexion" class="btn btn-info rounded-pill" name="deconnexion">Déconnexion</a>
                         <?php endif ?>
-
                     </div>
                 </div>
 
@@ -54,7 +54,7 @@ $uri = $_SERVER['REQUEST_URI'];
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../public/js/app.js"></script>
+    <script src="../public/js/app.js"></script>
     <script src="anijs-min.js"></script>
 </body>
 
