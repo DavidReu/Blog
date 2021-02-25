@@ -6,7 +6,7 @@ $session = new Session();
 $uri = $_SERVER['REQUEST_URI'];
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <!-- Template utilisé pour toutes les pages -->
 
 <head>
