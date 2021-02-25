@@ -35,7 +35,7 @@ $uri = $_SERVER['REQUEST_URI'];
                 <div class="container w-50">
                     <div class="d-flex justify-content-around align-items-center py-2">
                         <?php if ($session->get('admin') != true && $session->get('user') != true && $session->get('editor') != true) : ?>
-                            <a href="inscription" class="btn btn-large btn-info rounded-pill h-25">S'inscrire</a>
+                            <a href="/inscription" class="btn btn-large btn-info rounded-pill h-25">S'inscrire</a>
                             <?php if ($uri != "/connexion") : ?>
                                 <a href="/connexion" class="btn btn-large btn-info h-25 rounded-pill">Se connecter</a>
                             <?php endif ?>
