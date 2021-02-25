@@ -34,7 +34,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 $request = Request::createFromGlobals();
 $uri = $request->getPathInfo();
-var_dump($uri);
 
 //---------- SESSION ----------
 $session = new Session();
