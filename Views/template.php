@@ -47,3 +47,7 @@ $uri = $_SERVER['REQUEST_URI'];
             </div>
         </nav>
     </header>
+
+    <?php
+    //echo $content;
+    ?>
