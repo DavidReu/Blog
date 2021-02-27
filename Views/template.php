@@ -14,7 +14,7 @@ $uri = $_SERVER['REQUEST_URI'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="/public/css/style.css">
     <!-- AniCollection.css library -->
-    <link rel="stylesheet" href="http://anijs.github.io/lib/anicollection/anicollection.css">
+    <link rel="stylesheet" href="https://anijs.github.io/lib/anicollection/anicollection.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
@@ -47,7 +47,6 @@ $uri = $_SERVER['REQUEST_URI'];
             </div>
         </nav>
     </header>
-
-    <?php
-    //echo $content;
-    ?>
+    <div class="container-fluid text-center">
+        <h1 class="my-3">Le blog chill</h1>
+    </div>

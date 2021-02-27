@@ -28,26 +28,22 @@ const check = function() {
 //------------------ A améliorer -----------------
 // fonction supprimer utilisant AJAX 
 // setimeout obligatoire pour le moment pour attendre le chargement de la page
-const deleteButtons = document.querySelectorAll(".deleteUser")
-  //console.log(deleteButtons);
+
+ setTimeout(function(){
+  const deleteButtons = document.querySelectorAll(".deleteUser")
   deleteButtons.forEach(button => {
     button.addEventListener('click', async function(event){
       event.preventDefault();
       userId  = button.value;
-      //console.log(document.querySelector(`.rowUser-${userId}`))
-        const response = await fetch('https://blog.ddev.site/users?id='+ userId, {
+        const response = await fetch(window.location.origin + '/users?id='+ userId, {
           method : "DELETE"  
         })
         const message = await response.json()
-        //console.log(message);
         const rowUser = document.querySelector(`.rowUser-${userId}`)
-        console.log(rowUser);
         rowUser.remove();
     })
   });
-/* setTimeout(function(){
-  
-},2000); */
+},2000); 
 //-----------------------------------------------------
 
 
@@ -57,7 +53,7 @@ setTimeout(function(){
       button.addEventListener('click', async function(event){
         event.preventDefault();
         commentId  = button.value;
-          const response = await fetch('https://blog.ddev.site/comments?id='+ commentId, {
+          const response = await fetch(window.location.origin + '/comments?id='+ commentId, {
             method : "DELETE"  
           })
           const message = await response.json()
