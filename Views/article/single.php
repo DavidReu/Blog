@@ -5,17 +5,23 @@ use Symfony\Component\HttpFoundation\Session\Session;
 $session = new Session(); ?>
 <div class="container-fluid my-4 h-100">
     <div class="row">
-        <div class="col offset-1 col-md-5 text-center">
-            <h3><?php echo $article->titre;
-                ?></h3>
+        <div class="col offset-1 col-md-5">
             <div>
                 <img style="border-radius: 10px; width:100%" src="<?php echo $article->img_url ?>" alt="">
             </div>
+
+        </div>
+        <div class="col col-md-5 text-center">
+            <h3>
+                <?php echo $article->titre; ?>
+            </h3>
             <p class="mt-3">
                 <?php echo $article->contenu
                 ?>
             </p>
         </div>
+    </div>
+    <div class="row d-flex justify-content-center my-5">
         <?php if ($session->get('user') == true || $session->get('admin') == true || $session->get('editor') == true) {
             include('commentaires/commentCreate.php');
         } else { ?>
@@ -26,6 +32,7 @@ $session = new Session(); ?>
         ?>
     </div>
 
+    <!---------- Partie commentaire ---------->
     <div class="row d-flex justify-content-around">
         <?php foreach ($commentaires as $key => $valeur) { ?>
             <div class="col-md-5 text-center border border-info rounded my-2">
@@ -35,7 +42,8 @@ $session = new Session(); ?>
                     <span><?php echo $valeur['prenom'] ?></span>
                 </div>
                 <?php if ($session->get("userId") == $valeur['usersId']) : ?>
-                    <button class="btn btn-info btn-small my-2" type="button" data-bs-toggle="modal" data-bs-target="#editModal">Editer</button>
+                    <button class="btn btn-info btn-small my-2" value="<?php echo $valeur['id'] ?>" type="submit" data-bs-toggle="modal" data-bs-target="#editModal" name="edit">Editer</button>
+                    <span> <?php echo $valeur['id'] ?> </span>
                     <!-- Modal -->
                     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
                         <div class="modal-dialog">

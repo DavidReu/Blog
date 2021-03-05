@@ -14,7 +14,8 @@ const check = function() {
   const mdp = document.getElementById('password').value;
   const mdpconfirm = document.getElementById('confirmpwd').value;
   const message = document.getElementById('message');
-    if ((mdp != null) && (mdp ==
+  var input = document.forms["myForm"]["mdp"].value;
+    if ((input != "") && (mdp ==
       mdpconfirm)) {
       message.style.color = 'green';
       message.innerHTML = 'Mot de passe identique';

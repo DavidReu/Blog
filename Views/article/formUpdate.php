@@ -4,10 +4,9 @@
             <h4>Vous pouvez modifier votre article ici</h4>
             <input style="height: 50px;" class="col-5 my-2" type="text" name="titre" value="<?php echo $article->titre;
                                                                                             ?>">
-            <textarea style="height: 100px;" class="col-5 my-2" name="contenu"><?php echo $article->contenu
-                                                                                ?></textarea>
-            <div class="col-5 my-2">
-                <div class="row text-center">
+            <textarea style="height: 100px;" class="col-5 my-2" name="contenu"><?php echo $article->contenu ?></textarea>
+            <div class="col-5 my-2 ">
+                <div class="row text-center ">
                     <img src="<?php echo $article->img_url ?>" style="border-radius: 10px; width:650px" alt="">
                     <label for="img">Sélectionnez votre image</label>
                     <input type="file" name="img" accept="image/png, image/jpeg">

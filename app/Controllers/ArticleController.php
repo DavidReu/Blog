@@ -64,8 +64,10 @@ class ArticleController extends Controller
         if ($longeur > 0) {
             $titre = $request->request->get('titre');
             $contenu = $request->request->get('contenu');
+            $img = $request->request->get('img');
             $titre = $this->valid($titre);
             $contenu = $this->valid($contenu);
+            $img = $this->valid($img);
             $img = $_FILES['img']['name'];
             $dossier = 'upload/';
             $userId = $session->get('userId');
@@ -103,8 +105,11 @@ class ArticleController extends Controller
         if (isset($modifier)) {
             $titre = $request->request->get('titre');
             $contenu = $request->request->get('contenu');
+            $img = $request->request->get('img');
             $titre = $this->valid($titre);
             $contenu = $this->valid($contenu);
+            $img = $this->valid($img);
+
             if (!empty($_FILES["img"]["tmp_name"])) {
                 $img = $_FILES['img']['name'];
                 $dossier = 'upload/';

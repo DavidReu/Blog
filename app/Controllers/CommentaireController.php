@@ -38,7 +38,7 @@ class CommentaireController extends Controller
         } else {
             $logger->error('Erreur lors de la création d\'un commentaire');
         }
-        (new RedirectResponse("index.php"))->send();
+        (new RedirectResponse("/article?id=" . $articleId))->send();
     }
 
     public function showAllComments(Request $request)
