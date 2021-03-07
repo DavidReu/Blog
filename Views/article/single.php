@@ -43,7 +43,6 @@ $session = new Session(); ?>
                 </div>
                 <?php if ($session->get("userId") == $valeur['usersId']) : ?>
                     <button class="btn btn-info btn-small my-2" value="<?php echo $valeur['id'] ?>" type="submit" data-bs-toggle="modal" data-bs-target="#editModal" name="edit">Editer</button>
-                    <span> <?php echo $valeur['id'] ?> </span>
                     <!-- Modal -->
                     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
                         <div class="modal-dialog">

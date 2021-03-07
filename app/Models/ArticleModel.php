@@ -50,7 +50,7 @@ class ArticleModel extends Model
 
     public function getAllArticle()
     {
-        $query = $this->pdo->query("SELECT * FROM articles");
+        $query = $this->pdo->query("SELECT a.id, a.titre, a.contenu, a.user_id, a.img_url, u.prenom FROM articles AS a INNER JOIN users AS u ON a.user_id = u.id");
         $articles = $query->fetchAll(\PDO::FETCH_ASSOC);
         return $articles;
     }

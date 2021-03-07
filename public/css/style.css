@@ -42,7 +42,7 @@ nav a:hover {
 }
 
 .card-body {
-  max-height: 19rem;
+  max-height: 20rem;
 }
 .preview {
   overflow: hidden !important;

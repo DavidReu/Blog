@@ -31,7 +31,7 @@ class CommentaireController extends Controller
         $commentaireModel = new CommentaireModel();
         $poster = $request->request->get('poster');
         $content = $request->request->get('content');
-        if (isset($poster) && !empty($content)) {
+        if (isset($poster) && !empty($content) && preg_match('/[a-zA-Zéèàêùûüîïôöàâä]+/', $content)) {
             $content = $this->valid($content);
             $logger->info('Commentaire bien créé');
             $commentaireModel->create($content, $articleId, $userId);
