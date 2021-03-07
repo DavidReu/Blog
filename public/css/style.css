@@ -44,6 +44,12 @@ nav a:hover {
 .card-body {
   max-height: 20rem;
 }
+
+.card-img-top {
+  height: 400px;
+  width: auto;
+}
+
 .preview {
   overflow: hidden !important;
   max-height: 12rem !important;

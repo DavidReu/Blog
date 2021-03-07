@@ -6,10 +6,10 @@ $session = new Session();
 
 ?>
 <div class="container-fluid">
-    <div class="row d-flex justify-content-center m-4">
+    <div class="row row-cols-sm-2 row-cols-md-3 d-flex justify-content-center m-4">
         <?php foreach ($articles as $key => $valeur) : ?>
-            <div class="card col-md-3 m-3 p-0 rounded">
-                <img src="<?php echo $valeur['img_url'] ?>" class="card-img-top h-75" alt="image lié à l'article">
+            <div class="card col col-sm-6 col-md-3 m-3 p-0 rounded">
+                <img src="<?php echo $valeur['img_url'] ?>" class="card-img-top" alt="image lié à l'article">
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $valeur["titre"] ?></h5>
                     <p class="card-text preview"><?php echo $valeur["contenu"] ?></p>
