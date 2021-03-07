@@ -120,9 +120,6 @@ class ArticleController extends Controller
             $article = $articleModel->getArticleById($id);
         } else {
             $logger->error('Echec de la moficiation');
-            /* $jsonResponse = new JsonResponse(['success' => false, 'message' => 'aucune donnée renvoyée', "bg-color" => "bg-danger"], 200);
-            $response = ['success' => false, 'message' => 'aucune donnée renvoyéé', 'bg-color' => 'bg-danger', 'statut' => 200];
-            $this->render('formUpdate', ['response' => $response]); */
         }
         $this->render('formUpdate', ['article' => $article]);
     }

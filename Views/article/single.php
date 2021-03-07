@@ -5,23 +5,45 @@ use Symfony\Component\HttpFoundation\Session\Session;
 $session = new Session(); ?>
 <div class="container-fluid my-4 h-100">
     <div class="row">
-        <div class="col offset-1 col-md-5">
+        <div>
+            <img class="m-2" style="border-radius: 10px; width:40%; float:left;" src="<?php echo $article->img_url ?>" alt="">
+            <div class="px-4">
+                <h3 class="text-center">
+                    <?php echo $article->titre; ?>
+                </h3>
+                <p class="mt-3">
+                    <?php echo $article->contenu
+                    ?>
+                </p>
+            </div>
+        </div>
+        <!-- <div class="col offset-1 col-md-5">
             <div>
-                <img style="border-radius: 10px; width:100%" src="<?php echo $article->img_url ?>" alt="">
+                <img style="border-radius: 10px; width:100%" src="<?php// echo $article->img_url ?>" alt="">
             </div>
 
         </div>
         <div class="col col-md-5 text-center">
             <h3>
-                <?php echo $article->titre; ?>
+                <?php// echo $article->titre; ?>
             </h3>
             <p class="mt-3">
-                <?php echo $article->contenu
+                <?php// echo $article->contenu
                 ?>
             </p>
-        </div>
+        </div> -->
     </div>
-    <div class="row d-flex justify-content-center my-5">
+
+    <!---------- Modification article ---------->
+    <?php if ($session->get('userId') == $article->user_id) : ?>
+        <div class="row text-center">
+            <a href="article/update?id=<?php echo $article->id ?>"><span>Vous pouvez modifier votre article ici </span></a>
+        </div>
+    <?php endif ?>
+    <!------------------------------------------>
+
+    <!---------- Ajout commentaire ---------->
+    <div class=" row d-flex justify-content-center my-5">
         <?php if ($session->get('user') == true || $session->get('admin') == true || $session->get('editor') == true) {
             include('commentaires/commentCreate.php');
         } else { ?>
@@ -31,6 +53,7 @@ $session = new Session(); ?>
         <?php }
         ?>
     </div>
+    <!---------------------------------------->
 
     <!---------- Partie commentaire ---------->
     <div class="row d-flex justify-content-around">
