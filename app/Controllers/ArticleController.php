@@ -44,10 +44,10 @@ class ArticleController extends Controller
         }
     }
 
-    public function showForm()
+    /* public function showForm()
     {
         $this->render('formcreate');
-    }
+    } */
 
     public function createForm(Request $request)
     {
@@ -61,32 +61,30 @@ class ArticleController extends Controller
         $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
 
-        if ($longeur > 0) {
+        if (isset($poster)) {
             $titre = $request->request->get('titre');
             $contenu = $request->request->get('contenu');
             $img = $request->request->get('img');
-            $titre = $this->valid($titre);
-            $contenu = $this->valid($contenu);
-            $img = $this->valid($img);
-            $img = $_FILES['img']['name'];
-            $dossier = 'upload/';
-            $userId = $session->get('userId');
-            $logger->info('Tout va bien');
-            if (!empty($_FILES["img"]["tmp_name"])) {
-                move_uploaded_file($_FILES["img"]["tmp_name"], $dossier . $img);
-                $fichier = '/upload' . '/' . $img;
-            } else {
-                $logger->error('Aucune images envoyées');
-                /* $jsonResponse = new JsonResponse(['success' => false, 'message' => 'aucune donnée renvoyée', "bg-color" => "bg-danger"], 200);
-                $response = ['success' => false, 'message' => 'aucune donnée renvoyéé', 'bg-color' => 'bg-danger', 'statut' => 200];
-                $this->render('formcreate', ['response' => $response]); */
+            if (!empty($titre) || !empty($contenu)) {
+                $titre = $this->valid($titre);
+                $contenu = $this->valid($contenu);
+                $img = $this->valid($img);
+                $img = $_FILES['img']['name'];
+                $dossier = 'upload/';
+                $userId = $session->get('userId');
+                $logger->info('Tout va bien');
+                if (!empty($_FILES["img"]["tmp_name"])) {
+                    move_uploaded_file($_FILES["img"]["tmp_name"], $dossier . $img);
+                    $fichier = '/upload' . '/' . $img;
+                } else {
+                    $logger->error('Aucune images envoyées');
+                    $this->render('formcreate');
+                }
+                $articleModel->create($titre, $contenu, $fichier, $userId);
             }
-            $articleModel->create($titre, $contenu, $fichier, $userId);
         } else {
             $logger->error('Aucune données envoyées');
-            /* $jsonResponse = new JsonResponse(['success' => false, 'message' => 'aucune donnée renvoyée', "bg-color" => "bg-danger"], 200);
-            $response = ['success' => false, 'message' => 'aucune donnée renvoyéé', 'bg-color' => 'bg-danger', 'statut' => 200];
-            $this->render('formcreate', ['response' => $response]); */
+            $this->render('formcreate');
         }
         (new RedirectResponse("/index.php"))->send();
     }

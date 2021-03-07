@@ -78,7 +78,6 @@ $map = [
     '/' => ['controller' => ArticleController::class, 'method' => 'home'],
     '/article' => ['controller' => ArticleController::class, 'method' => 'showArticle'],
     '/article/new' => ['controller' =>  ArticleController::class, 'method' => 'createForm'],
-    '/showForm'  => ['controller' =>  ArticleController::class, 'method' => 'showForm'],
     '/article/update' => ['controller' => ArticleController::class, 'method' => 'formUpdate'],
     '/inscription' => ['controller' => UserController::class, 'method' => 'register'],
     '/commentaire' => ['controller' => CommentaireController::class, 'method' => 'createCom'],
