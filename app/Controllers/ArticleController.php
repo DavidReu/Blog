@@ -81,12 +81,13 @@ class ArticleController extends Controller
                     $this->render('formcreate');
                 }
                 $articleModel->create($titre, $contenu, $fichier, $userId);
+                (new RedirectResponse("/index.php"))->send();
             }
         } else {
             $logger->error('Aucune données envoyées');
             $this->render('formcreate');
         }
-        (new RedirectResponse("/index.php"))->send();
+        $this->render('formcreate');
     }
 
     public function formUpdate(Request $request)
