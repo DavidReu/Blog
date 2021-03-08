@@ -19,14 +19,6 @@ $session = new Session(); ?>
         </div>
     </div>
 
-    <!---------- Modification article ---------->
-    <?php if ($session->get('userId') == $article->user_id) : ?>
-        <div class="row text-center">
-            <a href="article/update?id=<?php echo $article->id ?>"><span>Vous pouvez modifier votre article ici </span></a>
-        </div>
-    <?php endif ?>
-    <!------------------------------------------>
-
     <!---------- Ajout commentaire ---------->
     <div class=" row d-flex justify-content-center my-5">
         <?php if ($session->get('user') == true || $session->get('admin') == true || $session->get('editor') == true) {
