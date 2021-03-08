@@ -34,7 +34,7 @@ $session = new Session();
                 </section>
             </div>
             <?php if ($session->get('editor') == true) : ?>
-                <div class="mt-5">
+                <div class="mt-5git">
                     <div>
                         <h4>Mes articles</h4>
                     </div>
