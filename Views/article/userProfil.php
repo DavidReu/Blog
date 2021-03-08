@@ -6,7 +6,7 @@ $session = new Session();
 ?>
 <div class="container-fluid">
     <div class="row">
-        <div class="col col-3 bg-secondary p-3 text-center" style="height: 100vh;">
+        <div class="col col-3 bg-light p-3 text-center" style="height: 100vh;">
             <section>
                 <h4>Mon profil</h4>
                 <?php ?>
@@ -33,23 +33,23 @@ $session = new Session();
                     </ul>
                 </section>
             </div>
+            <?php if ($session->get('editor') == true) : ?>
+                <div class="mt-5">
+                    <div>
+                        <h4>Mes articles</h4>
+                    </div>
+                    <div>
+                        <section>
+                            <ul>
+                                <?php foreach ($articles as $key => $value) : ?>
+                                    <li><?php echo $value['titre'] ?> <a href="/article?id=<?php echo $value['id'] ?>">Voir l'article</a></li>
+                                <?php endforeach ?>
+                            </ul>
+                        </section>
+                    </div>
+                </div>
+            <?php endif ?>
         </div>
-        <?php if ($session->get('editor') == true) : ?>
-            <div class="container my-2">
-                <div>
-                    <h4>Mes articles</h4>
-                </div>
-                <div>
-                    <section>
-                        <ul>
-                            <?php foreach ($articles as $key => $value) : ?>
-                                <li><?php echo $value['titre'] ?> <a href="/article?id=<?php echo $value['id'] ?>">Voir l'article</a></li>
-                            <?php endforeach ?>
-                        </ul>
-                    </section>
-                </div>
-            </div>
-        <?php endif ?>
     </div>
 
 </div>
