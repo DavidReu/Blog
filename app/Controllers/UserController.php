@@ -73,11 +73,11 @@ class UserController extends Controller
             $nom = $request->request->get('nom');
             $prenom = $request->request->get('prenom');
 
-            if (!empty($mail) && !empty($mdp) && !empty($nom) && !empty($prenom) && filter_var($mail, FILTER_VALIDATE_EMAIL) && preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $mdp) && preg_match('/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/', $mail) && preg_match('/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/', $mail)) {
+            if (!empty($mail) && !empty($mdp) && !empty($nom) && !empty($prenom) && filter_var($mail, FILTER_VALIDATE_EMAIL) && preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $mdp) && preg_match('/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/', $mail)) {
                 $user = $userModel->checkMail($mail);
-                if (!$user->id) {
+                if (!$user['id']) {
                     $mail = $this->valid($mail);
-                    $mail = strtolower($mdp);
+                    $mail = strtolower($mail);
                     $mdp = $this->valid($mdp);
                     $nom = $this->valid($nom);
                     $prenom = $this->valid($prenom);
