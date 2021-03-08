@@ -17,21 +17,6 @@ $session = new Session(); ?>
                 </p>
             </div>
         </div>
-        <!-- <div class="col offset-1 col-md-5">
-            <div>
-                <img style="border-radius: 10px; width:100%" src="<?php// echo $article->img_url ?>" alt="">
-            </div>
-
-        </div>
-        <div class="col col-md-5 text-center">
-            <h3>
-                <?php// echo $article->titre; ?>
-            </h3>
-            <p class="mt-3">
-                <?php// echo $article->contenu
-                ?>
-            </p>
-        </div> -->
     </div>
 
     <!---------- Modification article ---------->

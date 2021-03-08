@@ -1,9 +1,9 @@
 <div>
-    <div>
+    <div class="text-center my-3">
         <h4>Liste des commentaires de chaque utilisateurs et le titre de l'article</h4>
     </div>
     <div class="container-fluid">
-        <form method="GET" class="d-flex">
+        <form method="GET" class="d-flex mt-4">
             <select class="form-select w-25" name="article" id="articles-select">
                 <option value="all">Tous les articles</option>
                 <?php foreach ($articles as $key => $value) : ?>

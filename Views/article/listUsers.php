@@ -1,5 +1,5 @@
 <div>
-    <div>
+    <div class="text-center my-3">
         <h4>Liste des utilisateurs inscris sur le site</h4>
     </div>
     <div class="container-fluid">
