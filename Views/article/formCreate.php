@@ -1,12 +1,3 @@
-<?php
-if (isset($response)) {
-    echo '<div class="card ' . $response['bg-color'] . '">
-    <div class="card-body">
-      ' . $response['message'] . '
-    </div>
-  </div>';
-}
-?>
 <div class="container-fluid">
     <h5 class="text-center">Créez votre article</h5>
     <div class="container">
