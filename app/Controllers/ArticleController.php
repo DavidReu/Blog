@@ -61,8 +61,8 @@ class ArticleController extends Controller
         $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
         echo 'BONJOUR';
-        $this->render('formcreate');
-        include('../../Views/article/formCreate.php');
+        $this->render('formUpdate');
+
 
         if (isset($poster)) {
             $titre = $request->request->get('titre');
