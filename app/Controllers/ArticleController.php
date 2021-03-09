@@ -59,9 +59,6 @@ class ArticleController extends Controller
         $logger = new Logger("create_article");
         $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
-        echo 'BONJOUR';
-        include('Views/article/formCreate.php');
-
 
         if (isset($poster)) {
             $titre = $request->request->get('titre');
@@ -87,7 +84,7 @@ class ArticleController extends Controller
             }
         } else {
             $logger->error('Aucune données envoyées');
-            $this->render('formcreate');
+            $this->render('formCreate');
         }
         $this->render('formCreate');
     }
