@@ -54,14 +54,13 @@ class ArticleController extends Controller
         $articleModel = new ArticleModel();
         $uri = $request->getPathInfo();
         $poster = $request->get('poster');
-        $longeur = strlen($request->request->get('titre'));
         $session = new Session();
 
         $logger = new Logger("create_article");
         $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
         echo 'BONJOUR';
-        $this->render('formUpdate');
+        include('Views/article/formCreate.php');
 
 
         if (isset($poster)) {
