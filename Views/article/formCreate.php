@@ -1,5 +1,5 @@
-<div class="container-fluid">
-    <h5 class="text-center">Créez votre article</h5>
+<div class="container-fluid my-4">
+    <h5 class="text-center fw-bold fs-3">Créez votre article</h5>
     <div class="container">
         <div class="row">
             <form action="/article/new" method="POST" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
