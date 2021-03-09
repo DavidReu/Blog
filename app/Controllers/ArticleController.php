@@ -89,7 +89,7 @@ class ArticleController extends Controller
             $logger->error('Aucune données envoyées');
             $this->render('formcreate');
         }
-        $this->render('formUpdate');
+        $this->render('formCreate');
     }
 
     public function formUpdate(Request $request)
