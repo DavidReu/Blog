@@ -108,11 +108,13 @@ class ArticleController extends Controller
             $contenu = $this->valid($contenu);
             $img = $this->valid($img);
 
-            if (!empty($_FILES["img"]["tmp_name"])) {
+            if (!empty($_FILES["img"]["tmp_name"]) && $_FILES["img"]["tmp_name"] != null) {
                 $img = $_FILES['img']['name'];
                 $dossier = 'upload/';
                 move_uploaded_file($_FILES["img"]["tmp_name"], $dossier . $img);
                 $fichier = '/upload' . '/' . $img;
+            } else {
+                $fichier = $article->img_url;
             }
             $articleModel->update($id, $titre, $contenu, $fichier);
             $logger->info('Modification effectuée');
