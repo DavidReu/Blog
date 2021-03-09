@@ -60,6 +60,7 @@ class ArticleController extends Controller
         $logger = new Logger("create_article");
         $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
+        $this->render('formcreate');
 
         if (isset($poster)) {
             $titre = $request->request->get('titre');
@@ -87,7 +88,7 @@ class ArticleController extends Controller
             $logger->error('Aucune données envoyées');
             $this->render('formcreate');
         }
-        $this->render('formcreate');
+        $this->render('formUpdate');
     }
 
     public function formUpdate(Request $request)

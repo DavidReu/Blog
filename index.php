@@ -43,7 +43,7 @@ $session->get('admin', false);
 $session->get('editor', false);
 $session->get('user', false);
 $session->get('userId', null);
-if ($session->get('admin') == true || $session->get('user') == true || $session->get('editor') == true) {
+/* if ($session->get('admin') == true || $session->get('user') == true || $session->get('editor') == true) {
     foreach ($session->getFlashBag()->get('notice', []) as $message) {
         include('Views/auth/messagelog.php');
     }
@@ -51,7 +51,7 @@ if ($session->get('admin') == true || $session->get('user') == true || $session-
     foreach ($session->getFlashBag()->get('erreur', []) as $message) {
         include('Views/auth/messagelog.php');
     }
-}
+} */
 //-----------------------------
 
 
