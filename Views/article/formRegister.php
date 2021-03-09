@@ -1,7 +1,7 @@
 <div class="container mt-5 mb-5">
     <div class="row d-flex align-items-center justify-content-center">
         <form class="col-md-6" method="POST" name="myForm">
-            <div class="formRegister px-5 py-5">
+            <div class="px-5 py-5 formRegister">
                 <h5 class="mt-3">Inscrivez-vous</h5>
                 <p class="mt-2 text-muted">Cela vous donne la possibilité de laisser des commentaires sur les articles</p>
                 <div class="form-input"> <i class="fa fa-envelope"></i> <input type="email" class="form-control" placeholder="Votre mail" name="mail" required pattern='^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'> </div>
