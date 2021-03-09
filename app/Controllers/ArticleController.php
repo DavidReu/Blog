@@ -60,6 +60,7 @@ class ArticleController extends Controller
         $logger = new Logger("create_article");
         $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         $logger->pushHandler(new FirePHPHandler());
+        echo 'BONJOUR';
         $this->render('formcreate');
 
         if (isset($poster)) {
